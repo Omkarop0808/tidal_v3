@@ -229,39 +229,39 @@ export const LiveMap = ({
                 }}
               >
                 <Popup>
-                  <div className="p-4 bg-[#050505] text-white font-mono text-xs uppercase min-w-[240px]">
-                    <div className="flex items-center justify-between pb-2 border-b border-[#333333] mb-3">
-                      <div className="font-headline font-black text-sm text-white tracking-tight flex items-center gap-1.5">
-                        <span className={`w-2 h-2 ${isSelected ? 'bg-[#ff4d00]' : 'bg-white'}`}></span>
+                  <div className="p-4 bg-white dark:bg-card text-slate-900 dark:text-white font-sans text-xs min-w-[240px] rounded-xl shadow-xl border border-slate-200 dark:border-border/70">
+                    <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-border/60 mb-3">
+                      <div className="font-sans font-bold text-sm text-slate-900 dark:text-white tracking-tight flex items-center gap-1.5">
+                        <span className={`w-2 h-2 rounded-full ${isSelected ? 'bg-orange-500' : 'bg-sky-500'}`}></span>
                         {h.zone_name}
                       </div>
-                      <span className="text-[9px] px-1.5 py-0.5 bg-[#222222] text-[#ff4d00] font-bold">
+                      <span className="text-[10px] px-2 py-0.5 bg-orange-50 dark:bg-orange-950/40 text-orange-600 dark:text-orange-400 font-bold rounded">
                         {h.sector}
                       </span>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-2 mb-3 text-[10px]">
-                      <div className="bg-[#111111] p-2 border border-[#222222]">
-                        <span className="text-[#737373] block mb-0.5">BEACHING RISK</span>
-                        <span className="font-bold text-sm text-[#ff4d00]">
+                    <div className="grid grid-cols-2 gap-2 mb-3 text-xs">
+                      <div className="bg-slate-50 dark:bg-muted/40 p-2.5 rounded-lg border border-slate-100 dark:border-border/50">
+                        <span className="text-slate-400 block mb-0.5 text-[10px] uppercase font-semibold">BEACHING RISK</span>
+                        <span className="font-bold text-sm text-orange-600 dark:text-orange-400 font-mono">
                           {h.risk_percentage}%
                         </span>
                       </div>
 
-                      <div className="bg-[#111111] p-2 border border-[#222222]">
-                        <span className="text-[#737373] block mb-0.5">EST. ACCUMULATION</span>
-                        <span className="font-bold text-sm text-white">
+                      <div className="bg-slate-50 dark:bg-muted/40 p-2.5 rounded-lg border border-slate-100 dark:border-border/50">
+                        <span className="text-slate-400 block mb-0.5 text-[10px] uppercase font-semibold">EST. DEBRIS</span>
+                        <span className="font-bold text-sm text-slate-900 dark:text-white font-mono">
                           {h.estimated_debris_kg} KG
                         </span>
                       </div>
                     </div>
 
-                    <div className="text-[9px] text-[#a3a3a3] mb-3 leading-relaxed border-l-2 border-[#ff4d00] pl-2">
-                      PRIMARY DRIVER: <strong className="text-white">{h.top_driver || 'WIND SURGE'}</strong><br />
-                      PEAK ARRIVAL: <strong className="text-white">T+{h.peak_arrival_hours || 12}H</strong>
+                    <div className="text-xs text-slate-600 dark:text-slate-400 mb-3 leading-relaxed border-l-2 border-orange-500 pl-2">
+                      PRIMARY DRIVER: <strong className="text-slate-900 dark:text-white">{h.top_driver || 'WIND SURGE'}</strong><br />
+                      PEAK ARRIVAL: <strong className="text-slate-900 dark:text-white font-mono">T+{h.peak_arrival_hours || 12}H</strong>
                     </div>
 
-                    <div className="px-2 py-1 bg-[#111111] border border-[#ff4d00]/40 text-[#ff4d00] text-[9px] text-center font-bold tracking-widest">
+                    <div className="px-3 py-1.5 bg-orange-50 dark:bg-orange-950/40 border border-orange-200 dark:border-orange-850/60 text-orange-600 dark:text-orange-400 text-xs text-center font-bold rounded-lg tracking-wider">
                       {isSelected ? 'LOCKED TARGET // TELEMETRY SYNCED' : 'CLICK TO SELECT'}
                     </div>
                   </div>
@@ -273,25 +273,25 @@ export const LiveMap = ({
       </div>
 
       {/* On-Map Tactical Legend Box */}
-      <div className="absolute bottom-4 left-4 z-10 bg-black/95 border-2 border-[#333333] p-3 text-white font-mono text-[9px] uppercase font-bold tracking-widest shadow-2xl flex flex-col gap-1.5 pointer-events-auto max-w-[240px]">
-        <div className="flex items-center gap-2 pb-1 border-b border-[#333333] text-[#a3a3a3]">
-          <Crosshair className="w-3 h-3 text-[#ff4d00]" />
+      <div className="absolute bottom-4 left-4 z-10 bg-white/95 dark:bg-card/95 backdrop-blur-md border border-slate-200 dark:border-border/70 p-3.5 text-slate-800 dark:text-slate-200 font-sans text-xs font-semibold rounded-xl shadow-lg flex flex-col gap-2 pointer-events-auto max-w-[250px]">
+        <div className="flex items-center gap-2 pb-1.5 border-b border-slate-100 dark:border-border/60 text-slate-500 dark:text-slate-400 text-[11px] uppercase tracking-wider font-bold">
+          <Crosshair className="w-3.5 h-3.5 text-orange-500" />
           <span>TACTICAL RADAR TARGETS</span>
         </div>
 
-        <div className="flex items-center gap-2">
-          <span className="w-3 h-3 bg-[#ff4d00] border border-white text-black font-black text-[7px] flex items-center justify-center">%</span>
-          <span className="text-[#ff4d00]">CRITICAL (&gt;75% PROBABILITY)</span>
+        <div className="flex items-center gap-2.5">
+          <span className="w-3 h-3 rounded-full bg-orange-500"></span>
+          <span className="text-orange-600 dark:text-orange-400 font-semibold">Critical (&gt;75% Risk)</span>
         </div>
 
-        <div className="flex items-center gap-2">
-          <span className="w-2.5 h-2.5 bg-[#00e5ff] border border-white"></span>
-          <span className="text-[#00e5ff]">MONITORED WATCH (30-75%)</span>
+        <div className="flex items-center gap-2.5">
+          <span className="w-3 h-3 rounded-full bg-cyan-500"></span>
+          <span className="text-sky-600 dark:text-cyan-400 font-semibold">Monitored Watch (30-75%)</span>
         </div>
 
-        <div className="flex items-center gap-2">
-          <span className="w-2.5 h-2.5 bg-[#10b981] border border-white"></span>
-          <span className="text-[#10b981]">SECURED / CLEANED</span>
+        <div className="flex items-center gap-2.5">
+          <span className="w-3 h-3 rounded-full bg-emerald-500"></span>
+          <span className="text-emerald-600 dark:text-emerald-400 font-semibold">Secured / Cleaned</span>
         </div>
       </div>
     </div>

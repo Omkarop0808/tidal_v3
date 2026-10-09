@@ -13,3 +13,4 @@ apscheduler
 requests
 scikit-learn
 python-multipart
+websockets

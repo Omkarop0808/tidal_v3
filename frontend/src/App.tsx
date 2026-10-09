@@ -33,7 +33,7 @@ function App() {
 
   return (
     <Router>
-      <div className="bg-background text-on-surface flex min-h-screen font-sans selection:bg-primary/20 selection:text-primary">
+      <div className="bg-slate-50 dark:bg-background text-slate-900 dark:text-on-surface flex min-h-screen font-sans selection:bg-[#ff4d00]/20 selection:text-[#ff4d00] transition-colors duration-200">
         <Sidebar 
           mobileOpen={mobileNavOpen} 
           onCloseMobile={() => setMobileNavOpen(false)} 
@@ -49,7 +49,7 @@ function App() {
           
           <TacticalMissionRibbon isCollapsed={sidebarCollapsed} />
           
-          <main className="relative pt-28 flex-1 flex flex-col">
+          <main className="relative pt-32 flex-1 flex flex-col">
             <Routes>
               <Route path="/" element={<Navigate to="/overview" replace />} />
               <Route path="/overview" element={<Overview />} />

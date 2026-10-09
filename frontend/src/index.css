@@ -5,56 +5,106 @@
 @layer base {
   :root {
     color-scheme: dark;
+    --bg-page: #000000;
+    --bg-card: #0a0a0a;
+    --bg-elevated: #141414;
+    --border-color: #262626;
+    --text-primary: #ffffff;
+    --text-secondary: #a3a3a3;
+  }
+
+  html.light,
+  :root:not(.dark) {
+    color-scheme: light;
+    --bg-page: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-elevated: #f1f5f9;
+    --border-color: #e2e8f0;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
   }
   
+  html {
+    font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
   html, body {
     margin: 0;
     padding: 0;
-    background-color: #03070a;
-    color: #f1f5f9;
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
 
-  body {
+  html.dark body {
+    background-color: #000000 !important;
+    color: #ffffff;
+    overscroll-behavior: none;
+    background-image: none !important;
+  }
+
+  html.light body,
+  html:not(.dark) body {
+    background-color: #f8fafc !important;
+    color: #0f172a !important;
     overscroll-behavior: none;
     background-image: 
-      radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.02), transparent 45%),
-      radial-gradient(circle at 90% 80%, rgba(255, 255, 255, 0.02), transparent 45%);
+      radial-gradient(circle at 10% 20%, rgba(2, 132, 199, 0.04), transparent 45%),
+      radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.03), transparent 45%) !important;
     background-attachment: fixed;
   }
 
   /* Custom browser selection */
   ::selection {
-    background-color: rgba(255, 77, 0, 0.3);
+    background-color: rgba(255, 77, 0, 0.25);
     color: #ff4d00;
   }
 }
 
 @layer utilities {
+  /* Scale up any legacy cramped font sizes to ensure complete legibility */
+  .text-\[8px\], .text-\[9px\] {
+    font-size: 0.72rem !important;
+    line-height: 1.15rem !important;
+    letter-spacing: 0.04em !important;
+  }
+
+  .text-\[10px\] {
+    font-size: 0.76rem !important;
+    line-height: 1.2rem !important;
+    letter-spacing: 0.03em !important;
+  }
+
   /* Tactical Glass Panel */
   .glass-panel {
-    background-color: rgba(9, 14, 23, 0.85);
+    background-color: rgba(10, 10, 10, 0.92);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(20, 35, 54, 1);
+    border: 1px solid #262626;
+    border-radius: 12px;
   }
 
   .glass-panel-interactive {
-    background-color: rgba(9, 14, 23, 0.85);
+    background-color: rgba(10, 10, 10, 0.92);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(20, 35, 54, 1);
+    border: 1px solid #262626;
+    border-radius: 12px;
     transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .glass-panel-interactive:hover {
-    background-color: rgba(17, 17, 17, 0.95);
-    border-color: rgba(255, 255, 255, 0.5);
+    background-color: #141414;
+    border-color: #404040;
+    box-shadow: 0 4px 16px -2px rgba(255, 77, 0, 0.2);
   }
 
   /* Tactical Card */
   .tactical-card {
-    background: #000000;
-    border: 1px solid #142336;
+    background: #0a0a0a;
+    border: 1px solid #262626;
+    border-radius: 12px;
     position: relative;
   }
 
@@ -64,7 +114,7 @@
 
   .tactical-card-hover:hover {
     border-color: rgba(255, 77, 0, 0.5);
-    background-color: rgba(17, 17, 17, 1);
+    background-color: #141414;
   }
 
   .corner-bracket {
@@ -92,8 +142,8 @@
   }
 
   /* Text glow */
-  .text-glow {
-    text-shadow: none;
+  .text-glow-cyan {
+    text-shadow: 0 0 12px rgba(0, 229, 255, 0.4);
   }
   
   .text-glow-error {
@@ -110,16 +160,16 @@
   }
 
   .leaflet-container {
-    background-color: #050505 !important;
+    background-color: #060b13 !important;
     font-family: inherit !important;
   }
 
   .leaflet-popup-content-wrapper {
-    background: #050505 !important;
+    background: #0b1320 !important;
     color: #ffffff !important;
-    border: 2px solid #ff4d00 !important;
-    border-radius: 0px !important;
-    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.95) !important;
+    border: 2px solid #00e5ff !important;
+    border-radius: 10px !important;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.75) !important;
     padding: 0 !important;
   }
 
@@ -145,67 +195,317 @@
   }
 
   .leaflet-tooltip.custom-tooltip {
-    background: #000000 !important;
-    border: 1px solid rgba(255, 255, 255, 0.4) !important;
+    background: #0b1320 !important;
+    border: 1px solid rgba(56, 189, 248, 0.4) !important;
     color: #ffffff !important;
-    border-radius: 0px !important;
-    box-shadow: none !important;
+    border-radius: 6px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
     padding: 6px 10px !important;
-    font-family: "Fira Code", monospace !important;
+    font-family: "JetBrains Mono", monospace !important;
     font-size: 0.75rem !important;
   }
   .leaflet-tooltip.error-tooltip {
     border-color: rgba(220, 38, 38, 0.5) !important;
   }
   .leaflet-tooltip.primary-tooltip {
-    border-color: rgba(255, 255, 255, 0.5) !important;
+    border-color: rgba(0, 229, 255, 0.5) !important;
   }
   .leaflet-tooltip.secondary-tooltip {
     border-color: rgba(255, 77, 0, 0.5) !important;
   }
   .leaflet-tooltip-top:before, .leaflet-tooltip-bottom:before, .leaflet-tooltip-left:before, .leaflet-tooltip-right:before {
-    border-top-color: rgba(13, 27, 42, 0.9) !important;
+    border-top-color: rgba(11, 19, 32, 0.9) !important;
   }
 }
 
+/* ==========================================================================
+   DARK MODE BULLETPROOF COLOR & CARD ENFORCEMENT
+   Guarantees true pitch-black backgrounds (#000000) and deep matte black
+   cards (#0a0a0a) in dark mode, matching the original aesthetic exactly.
+   ========================================================================== */
+html.dark body,
+:root.dark body {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+html.dark .bg-white.dark\:bg-card,
+html.dark .dark\:bg-card,
+html.dark [class*="dark:bg-card"] {
+  background-color: #0a0a0a !important;
+}
+
+html.dark .bg-slate-50.dark\:bg-background,
+html.dark .dark\:bg-background,
+html.dark [class*="dark:bg-background"] {
+  background-color: #000000 !important;
+}
+
+html.dark .bg-slate-50.dark\:bg-abyss,
+html.dark .dark\:bg-abyss,
+html.dark [class*="dark:bg-abyss"] {
+  background-color: #000000 !important;
+}
+
+html.dark .bg-white.dark\:bg-abyss-card,
+html.dark .dark\:bg-abyss-card,
+html.dark [class*="dark:bg-abyss-card"] {
+  background-color: #0a0a0a !important;
+}
+
+html.dark .dark\:bg-abyss-elevated,
+html.dark [class*="dark:bg-abyss-elevated"],
+html.dark [class*="dark:bg-muted"] {
+  background-color: #141414 !important;
+}
+
+html.dark .border-slate-200.dark\:border-border\/70,
+html.dark [class*="dark:border-border"] {
+  border-color: #262626 !important;
+}
+
+html.dark [class*="dark:border-abyss-border"] {
+  border-color: #262626 !important;
+}
+
+html.dark .dark\:text-white,
+html.dark [class*="dark:text-white"] {
+  color: #ffffff !important;
+}
+
+html.dark .dark\:text-slate-100,
+html.dark [class*="dark:text-slate-100"] {
+  color: #f5f5f5 !important;
+}
+
+html.dark .dark\:text-slate-200,
+html.dark [class*="dark:text-slate-200"] {
+  color: #e5e5e5 !important;
+}
+
+html.dark .dark\:text-slate-300,
+html.dark [class*="dark:text-slate-300"] {
+  color: #d4d4d4 !important;
+}
+
+html.dark .dark\:text-slate-400,
+html.dark [class*="dark:text-slate-400"] {
+  color: #a3a3a3 !important;
+}
+
+html.dark select option {
+  background-color: #0a0a0a !important;
+  color: #ffffff !important;
+}
+
+/* ==========================================================================
+   LIGHT MODE OVERRIDES & HARMONIZATION
+   ========================================================================== */
+html.light .glass-panel {
+  background-color: rgba(255, 255, 255, 0.92) !important;
+  border: 1px solid rgba(226, 232, 240, 1) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+  border-radius: 12px;
+}
+
+html.light .glass-panel-interactive:hover {
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+}
+
+html.light .tactical-card {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05) !important;
+  border-radius: 12px;
+}
+
+/* Preserve Luminous Text on Dark 3D Overlays and Accent Surfaces in Light Mode */
+html.light .hud-dark,
+html.light [data-theme-preserve="dark"] {
+  background-color: rgba(15, 23, 42, 0.92) !important;
+  border-color: rgba(51, 65, 85, 0.8) !important;
+  color: #f8fafc !important;
+}
+
+html.light .hud-dark .text-white,
+html.light .hud-dark span.text-white,
+html.light [data-theme-preserve="dark"] .text-white {
+  color: #ffffff !important;
+}
+
+html.light .hud-dark .text-slate-200,
+html.light .hud-dark .text-slate-300,
+html.light [data-theme-preserve="dark"] .text-slate-200,
+html.light [data-theme-preserve="dark"] .text-slate-300 {
+  color: #e2e8f0 !important;
+}
+
+html.light .hud-dark .text-slate-400,
+html.light [data-theme-preserve="dark"] .text-slate-400 {
+  color: #94a3b8 !important;
+}
+
+html.light .hud-dark .text-cyan-400,
+html.light [data-theme-preserve="dark"] .text-cyan-400 {
+  color: #22d3ee !important;
+}
+
+html.light .hud-dark .text-orange-400,
+html.light [data-theme-preserve="dark"] .text-orange-400 {
+  color: #fb923c !important;
+}
+
+/* Form Controls in Light Mode - High Contrast and Legibility */
+html.light input[type="text"],
+html.light input[type="number"],
+html.light select,
+html.light textarea {
+  color: #0f172a !important;
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+}
+
+html.light input:focus,
+html.light select:focus,
+html.light textarea:focus {
+  border-color: #0284c7 !important;
+  box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.15) !important;
+}
+
+/* Hover States for Interactive Cards & Rows in Light Mode */
+html.light .tactical-card-hover:hover {
+  border-color: #0284c7 !important;
+  background-color: #f8fafc !important;
+  box-shadow: 0 4px 14px 0 rgba(2, 132, 199, 0.08) !important;
+}
+
+html.light .hover\:bg-slate-50:hover {
+  background-color: #f1f5f9 !important;
+}
+
+/* Accent Color Contrast Upgrades in Light Mode */
+html.light .text-cyan-400 {
+  color: #0284c7;
+}
+
+html.light .text-cyan-300 {
+  color: #0369a1;
+}
+
+html.light .text-amber-400 {
+  color: #d97706;
+}
+
+html.light .text-orange-400 {
+  color: #ea580c;
+}
+
+html.light .text-slate-200,
+html.light .text-slate-300 {
+  color: #334155;
+}
+
+html.light .text-slate-400 {
+  color: #64748b;
+}
+
+/* Leaflet in Light Mode */
+html.light .map-tiles,
+html.light .dark-map-tiles,
+html.light .cartodb-dark-tiles {
+  filter: none !important;
+}
+
+html.light .leaflet-container {
+  background-color: #f1f5f9 !important;
+}
+
+html.light .leaflet-popup-content-wrapper {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border: 2px solid #0284c7 !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1) !important;
+}
+
+html.light .leaflet-container a.leaflet-popup-close-button {
+  color: #0f172a !important;
+}
+
+html.light .leaflet-tooltip.custom-tooltip {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #0f172a !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Custom Scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
-::-webkit-scrollbar-track {
-  background: #000000;
+html.dark ::-webkit-scrollbar-track {
+  background: #060b13;
 }
-::-webkit-scrollbar-thumb {
-  background: #333333;
-  border-radius: 0px;
+html.dark ::-webkit-scrollbar-thumb {
+  background: #1b2a40;
+  border-radius: 4px;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: #555555;
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: #2a4163;
 }
 
-/* Custom range input slider */
+html.light ::-webkit-scrollbar-track,
+html:not(.dark) ::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+html.light ::-webkit-scrollbar-thumb,
+html:not(.dark) ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+html.light ::-webkit-scrollbar-thumb:hover,
+html:not(.dark) ::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Range Sliders */
 input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
-  background: #222222;
-  border-radius: 0px;
+  border-radius: 4px;
   height: 6px;
+}
+html.dark input[type="range"] {
+  background: #101b2c;
+}
+html.light input[type="range"],
+html:not(.dark) input[type="range"] {
+  background: #e2e8f0;
 }
 
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 14px;
-  height: 14px;
-  border-radius: 0px;
-  background: #ffffff;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
   cursor: pointer;
-  box-shadow: none;
-  border: 1px solid #000000;
-  transition: transform 0.1s ease;
+  transition: transform 0.12s ease;
+}
+
+html.dark input[type="range"]::-webkit-slider-thumb {
+  background: #00e5ff;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+}
+html.light input[type="range"]::-webkit-slider-thumb,
+html:not(.dark) input[type="range"]::-webkit-slider-thumb {
+  background: #0284c7;
+  border: 2px solid #ffffff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 }
 
 input[type="range"]::-webkit-slider-thumb:hover {
   transform: scale(1.2);
-  background: #ff4d00;
 }

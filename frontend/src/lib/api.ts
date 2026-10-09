@@ -58,7 +58,10 @@ export const api = {
     apiClient.post('/recovery/sign-manifest', data).then(res => res.data),
   
   // Chat
-  chat: (message: string) => apiClient.post('/chat', { message }).then(res => res.data),
+  chat: (payload: string | { message: string; current_route?: string; active_zone?: any; sim_context?: any }) => {
+    const body = typeof payload === 'string' ? { message: payload } : payload;
+    return apiClient.post('/chat', body).then(res => res.data);
+  },
   
   // Specific Analysis
   getTelemetryAnalysis: (id: string) => apiClient.get(`/telemetry/analysis/${id}`).then(res => res.data),

@@ -17,6 +17,7 @@ from services.drift import drift_engine
 from services.vision import vision_service
 from services.dispatch import dispatch_service
 from services.store import store_service
+from services.chat_engine import chat_engine
 from ml.model import risk_model
 from ml.features import extract_features
 import uuid
@@ -56,6 +57,9 @@ class DispatchRequest(BaseModel):
 
 class ChatMessage(BaseModel):
     message: str
+    current_route: Optional[str] = None
+    active_zone: Optional[dict] = None
+    sim_context: Optional[dict] = None
 
 class CreateTaskRequest(BaseModel):
     beach_id: str
@@ -81,6 +85,14 @@ def read_root():
         "system": "TIDAL Marine Intelligence & Fleet Command Platform",
         "version": "2.5.0",
         "sectors": "Greater Mumbai Coastal Boundary (Colaba to Vasai Creek)"
+    }
+
+@app.get("/api/health")
+def health_check():
+    return {
+        "status": "healthy",
+        "service": "tidal-backend",
+        "timestamp": datetime.now().isoformat()
     }
 
 @app.websocket("/ws/live")
@@ -395,40 +407,11 @@ async def report_observation(file: UploadFile = File(...)):
 @app.post("/api/v1/chat")
 async def chat_with_data(chat: ChatMessage):
     live_env = env_service.get_current_data() or {}
-    beaches = store_service.get_beaches()
-    accuracy = store_service.get_accuracy_metrics()
-    
-    context = {
-        "live_environment": live_env,
-        "coastal_beaches": beaches[:4],
-        "model_accuracy": accuracy.get("average_accuracy_pct", 93.5)
-    }
-    
-    try:
-        client = genai.Client()
-        system_instruction = f"""
-        You are Ocean-GPT, the maritime tactical intelligence copilot for the TIDAL platform.
-        You monitor marine debris accumulation, hydrodynamic Monte Carlo drift, and autonomous fleet cleanup across the Greater Mumbai coastline.
-        Live System Context: {json.dumps(context)}
-        Provide direct, technical, concise answers explaining risk factors, arrival times, and fleet recommendations.
-        """
-        response = client.models.generate_content(
-            model='gemini-2.5-flash',
-            contents=chat.message,
-            config=types.GenerateContentConfig(
-                system_instruction=system_instruction,
-                temperature=0.3
-            )
-        )
-        return {"response": response.text}
-    except Exception:
-        # Context-rich offline fallback
-        msg_lower = chat.message.lower()
-        if "juhu" in msg_lower:
-            return {"response": "Juhu Beach currently has 380 kg predicted accumulation with an incoming risk tier of HIGH (82%). Last cleanup was logged 14 hours ago (310 kg removed, 70 kg residual). Recommended inspection window is tomorrow morning during low tide."}
-        elif "versova" in msg_lower:
-            return {"response": "Versova Creek (Sector 04) is flagged as CRITICAL (94% risk) with 520 kg predicted debris accumulation due to strong SW wind vectors (24 km/h) and Mithi outflow. Autonomous Skimmer SKM-01 is assigned for interception."}
-        elif "hungarian" in msg_lower or "fleet" in msg_lower:
-            return {"response": "The Hungarian bipartite matching algorithm assigns fleet vessels (SKM-01, SKM-02, Aqua-Sweep) to coastal sectors minimizing travel distance and matching vessel payload capacity to predicted debris mass."}
-        else:
-            return {"response": f"TIDAL Command Telemetry Active. Monitoring 7 Greater Mumbai sectors with {accuracy.get('average_accuracy_pct', 93.5)}% verified prediction accuracy. Active primary hotspot is Versova Creek Outfall."}
+    response_text = chat_engine.generate_response(
+        message=chat.message,
+        current_route=chat.current_route,
+        active_zone=chat.active_zone,
+        sim_context=chat.sim_context,
+        env_data=live_env
+    )
+    return {"response": response_text}

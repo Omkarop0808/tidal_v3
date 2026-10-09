@@ -60,48 +60,48 @@ export default function ModelLab() {
   };
 
   return (
-    <main className="w-full bg-[#050505] min-h-screen text-white px-4 sm:px-8 lg:px-12 py-8 max-w-[1600px] mx-auto border-x-2 border-[#333333]">
-      <div className="flex flex-col gap-12">
+    <main className="w-full bg-slate-50 dark:bg-background min-h-screen text-slate-900 dark:text-slate-100 px-4 sm:px-8 lg:px-12 py-8 max-w-[1600px] mx-auto font-sans transition-colors duration-200">
+      <div className="flex flex-col gap-10">
         
         {/* Header Bar */}
-        <div className="flex flex-col gap-4 pb-8 border-b-2 border-[#333333]">
-          <div className="flex items-center gap-4">
-            <span className="px-4 py-2 bg-white text-black font-mono text-[10px] uppercase font-bold tracking-widest flex items-center gap-2">
-              <Cpu className="w-4 h-4" />
+        <div className="flex flex-col gap-3 pb-6 border-b border-slate-200 dark:border-border/70">
+          <div className="flex items-center gap-3">
+            <span className="px-2.5 py-1 bg-sky-50 dark:bg-sky-950/40 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-800/60 font-mono text-xs uppercase font-semibold rounded-md flex items-center gap-1.5">
+              <Cpu className="w-3.5 h-3.5 text-sky-500" />
               ML OBSERVABILITY
             </span>
-            <span className="text-[#ff4d00] font-mono text-[10px] uppercase font-bold tracking-widest">
+            <span className="text-orange-600 dark:text-orange-400 font-mono text-xs uppercase font-semibold tracking-wider">
               // PRODUCTION WEIGHTS
             </span>
           </div>
-          <h1 className="text-4xl sm:text-6xl font-headline font-black tracking-tighter uppercase text-white">
+          <h1 className="text-3xl sm:text-5xl font-sans font-extrabold uppercase tracking-tight text-slate-900 dark:text-white">
             Model Lab & Diagnostics
           </h1>
-          <p className="text-sm font-mono text-[#a3a3a3] uppercase font-bold tracking-widest max-w-3xl leading-relaxed border-l-4 border-white pl-4">
+          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-3xl leading-relaxed border-l-2 border-sky-500 pl-4">
             Real-time inference telemetry, SHAP feature importance explainability, and validation metrics for the XGBoost Beaching Forecaster and YOLO11 Underwater Pipeline.
           </p>
         </div>
 
         {/* Action / Trigger Banner */}
-        <div className="p-8 bg-[#111111] border-2 border-white flex flex-col md:flex-row justify-between items-center gap-8 relative group">
-          <div className="absolute right-0 top-0 h-full w-32 bg-[#ff4d00] opacity-0 group-hover:opacity-10 transition-opacity pointer-events-none"></div>
-          
-          <div className="flex items-center gap-6 relative z-10 w-full md:w-auto">
-            <Database className="w-12 h-12 text-white" />
-            <div className="flex flex-col gap-2">
-              <h3 className="text-2xl font-headline font-black text-white uppercase tracking-tighter">
-                Feedback Pipeline
+        <div className="p-6 sm:p-8 bg-white dark:bg-card border border-slate-200 dark:border-border/70 rounded-2xl shadow-sm flex flex-col md:flex-row justify-between items-center gap-6 relative group">
+          <div className="flex items-center gap-5 w-full md:w-auto">
+            <div className="p-3 bg-orange-50 dark:bg-orange-950/40 rounded-xl border border-orange-200 dark:border-orange-850/60 text-orange-500">
+              <Database className="w-8 h-8" />
+            </div>
+            <div className="flex flex-col gap-1">
+              <h3 className="text-xl font-sans font-bold text-slate-900 dark:text-white">
+                Feedback Fine-Tuning Pipeline
               </h3>
-              <p className="text-[10px] font-mono text-[#a3a3a3] uppercase font-bold tracking-widest">
-                <strong className="text-white">124 NEW OBSERVATIONS</strong> QUEUED FOR FINE-TUNING.
+              <p className="text-xs text-slate-500 dark:text-slate-400">
+                <strong className="text-slate-900 dark:text-white font-semibold">124 new verified observations</strong> queued for offline fine-tuning.
               </p>
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center gap-6 relative z-10 w-full md:w-auto justify-end">
+          <div className="flex flex-col sm:flex-row items-center gap-4 w-full md:w-auto justify-end">
             {retrainSuccess && (
-              <span className="text-[10px] font-mono text-[#ff4d00] font-bold uppercase tracking-widest flex items-center gap-2 bg-[#ff4d00]/10 px-4 py-2 border border-[#ff4d00]">
-                <CheckCircle2 className="w-4 h-4" />
+              <span className="text-xs font-mono text-emerald-600 dark:text-emerald-400 font-bold uppercase tracking-wider flex items-center gap-1.5 bg-emerald-50 dark:bg-emerald-950/40 px-3 py-2 rounded-lg border border-emerald-200 dark:border-emerald-800/60">
+                <CheckCircle2 className="w-4 h-4 text-emerald-500" />
                 WEIGHTS SYNCED
               </span>
             )}
@@ -109,16 +109,16 @@ export default function ModelLab() {
             <button 
               onClick={handleRetrain}
               disabled={isRetraining}
-              className="w-full sm:w-auto px-8 py-4 bg-white hover:bg-[#ff4d00] text-black font-headline font-black text-sm uppercase tracking-widest border-2 border-white hover:border-[#ff4d00] transition-none flex items-center justify-center gap-4 disabled:opacity-50"
+              className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-md transition-all flex items-center justify-center gap-2.5 disabled:opacity-50"
             >
               {isRetraining ? (
                 <>
-                  <RefreshCw className="w-5 h-5 animate-spin" />
+                  <RefreshCw className="w-4 h-4 animate-spin" />
                   <span>FINE-TUNING...</span>
                 </>
               ) : (
                 <>
-                  <RefreshCw className="w-5 h-5" />
+                  <RefreshCw className="w-4 h-4" />
                   <span>TRIGGER RETRAIN</span>
                 </>
               )}
@@ -127,47 +127,49 @@ export default function ModelLab() {
         </div>
 
         {/* Asymmetric Bento Grid: XGBoost (span 8) & YOLO11 Vision (span 4) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-[1px] bg-[#333333] border-2 border-[#333333]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
           
           {/* Bento Card 1: XGBoost */}
-          <div className="lg:col-span-8 p-8 bg-[#000000] flex flex-col justify-between gap-8">
-            <div className="flex justify-between items-center pb-4 border-b-2 border-[#333333]">
-              <div className="flex items-center gap-4">
-                <Square className="w-6 h-6 fill-white text-white" />
-                <div className="flex flex-col gap-1">
-                  <h2 className="text-2xl font-headline font-black text-white uppercase tracking-tighter">XGBoost Forecaster</h2>
-                  <span className="text-[10px] font-mono text-[#a3a3a3] uppercase font-bold tracking-widest">V2.8-PROD</span>
+          <div className="lg:col-span-8 p-6 sm:p-8 bg-white dark:bg-card border border-slate-200 dark:border-border/70 rounded-2xl shadow-sm flex flex-col justify-between gap-6">
+            <div className="flex justify-between items-center pb-4 border-b border-slate-100 dark:border-border/70">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-sky-50 dark:bg-sky-950/40 rounded-lg border border-sky-200 dark:border-sky-800/60 text-sky-500">
+                  <Square className="w-4 h-4 fill-current" />
+                </div>
+                <div className="flex flex-col">
+                  <h2 className="text-xl font-sans font-bold text-slate-900 dark:text-white">XGBoost Coastal Forecaster</h2>
+                  <span className="text-xs font-mono text-slate-400">V2.8-PROD WEIGHTS</span>
                 </div>
               </div>
-              <span className="px-4 py-2 bg-white text-black font-mono text-[10px] uppercase font-bold tracking-widest">
+              <span className="px-2.5 py-1 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/60 font-mono text-xs font-bold rounded-md uppercase">
                 ONLINE
               </span>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
               {/* Left Column: KPI Metrics */}
-              <div className="flex flex-col gap-4 font-mono text-[10px] uppercase font-bold tracking-widest">
-                <div className="p-6 bg-[#111111] border-l-4 border-l-white flex flex-col gap-2 relative group hover:bg-[#1a1a1a] transition-none">
-                  <span className="text-[#a3a3a3]">MEAN ABSOLUTE ERROR</span>
-                  <span className="text-5xl font-headline font-black text-white">{labMetrics.mae} <span className="text-xl">KG</span></span>
-                  <span className="text-[#525252] mt-2 border-t border-[#333333] pt-2">TARGET &lt; 20 KG</span>
+              <div className="flex flex-col gap-4 text-xs font-semibold">
+                <div className="p-5 bg-slate-50 dark:bg-muted/30 border border-slate-200 dark:border-border/60 rounded-xl flex flex-col gap-1">
+                  <span className="text-slate-400 uppercase text-[11px]">MEAN ABSOLUTE ERROR</span>
+                  <span className="text-4xl font-sans font-extrabold text-slate-900 dark:text-white font-mono">{labMetrics.mae} <span className="text-lg font-normal text-slate-400">KG</span></span>
+                  <span className="text-slate-500 dark:text-slate-400 mt-2 border-t border-slate-200 dark:border-border/50 pt-1.5 text-[11px]">TARGET &lt; 20 KG • HIGH PRECISION</span>
                 </div>
 
-                <div className="p-6 bg-[#111111] border-l-4 border-l-[#ff4d00] flex flex-col gap-2 relative group hover:bg-[#1a1a1a] transition-none">
-                  <span className="text-[#a3a3a3]">COEFFICIENT (R²)</span>
-                  <span className="text-5xl font-headline font-black text-[#ff4d00]">{labMetrics.r2}</span>
-                  <span className="text-[#525252] mt-2 border-t border-[#333333] pt-2">HIGH FIT CORRELATION</span>
+                <div className="p-5 bg-orange-50/60 dark:bg-orange-950/30 border border-orange-200/80 dark:border-orange-850/50 rounded-xl flex flex-col gap-1">
+                  <span className="text-slate-400 uppercase text-[11px]">COEFFICIENT (R²)</span>
+                  <span className="text-4xl font-sans font-extrabold text-orange-600 dark:text-orange-400 font-mono">{labMetrics.r2}</span>
+                  <span className="text-slate-500 dark:text-slate-400 mt-2 border-t border-orange-200/60 dark:border-orange-850/40 pt-1.5 text-[11px]">STRONG R² CORRELATION FIT</span>
                 </div>
               </div>
 
               {/* Right Column: SHAP */}
-              <div className="flex flex-col gap-6 font-mono text-[10px] uppercase font-bold tracking-widest">
-                <div className="flex items-center justify-between pb-2 border-b border-[#333333]">
-                  <span className="text-white">SHAP VECTORS</span>
-                  <span className="bg-[#333333] px-2 py-1 text-[#a3a3a3]">pred_contribs=True</span>
+              <div className="flex flex-col gap-4 text-xs">
+                <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-border/60">
+                  <span className="font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider">SHAP FEATURE IMPORTANCE</span>
+                  <span className="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 px-2 py-0.5 rounded text-[11px] font-mono">pred_contribs=True</span>
                 </div>
 
-                <div className="flex flex-col gap-6 w-full">
+                <div className="flex flex-col gap-4 w-full">
                   {!telemetryData ? (
                     <>
                       <Skeleton className="h-8 w-full" />
@@ -176,33 +178,33 @@ export default function ModelLab() {
                     </>
                   ) : (
                     <>
-                      <div className="flex flex-col gap-2">
-                        <div className="flex justify-between text-[#a3a3a3]">
-                          <span>1. WIND VELOCITY</span>
-                          <span className="text-white">+{shapContribs.wind_speed || 45}%</span>
+                      <div className="flex flex-col gap-1.5">
+                        <div className="flex justify-between text-xs">
+                          <span className="font-medium text-slate-600 dark:text-slate-400">1. WIND VELOCITY</span>
+                          <span className="font-mono font-bold text-slate-900 dark:text-white">+{shapContribs.wind_speed || 45}%</span>
                         </div>
-                        <div className="h-4 w-full bg-[#111111] border border-[#333333]">
-                          <div className="h-full bg-white" style={{ width: `${shapContribs.wind_speed || 45}%` }}></div>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-col gap-2">
-                        <div className="flex justify-between text-[#a3a3a3]">
-                          <span>2. PRECIPITATION</span>
-                          <span className="text-[#ff4d00]">+{shapContribs.rainfall_48h || 30}%</span>
-                        </div>
-                        <div className="h-4 w-full bg-[#111111] border border-[#333333]">
-                          <div className="h-full bg-[#ff4d00]" style={{ width: `${shapContribs.rainfall_48h || 30}%` }}></div>
+                        <div className="h-2.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                          <div className="h-full bg-sky-500 rounded-full" style={{ width: `${shapContribs.wind_speed || 45}%` }}></div>
                         </div>
                       </div>
 
-                      <div className="flex flex-col gap-2">
-                        <div className="flex justify-between text-[#a3a3a3]">
-                          <span>3. TIDAL VECTOR</span>
-                          <span className="text-[#525252]">+{shapContribs.tide_velocity || 15}%</span>
+                      <div className="flex flex-col gap-1.5">
+                        <div className="flex justify-between text-xs">
+                          <span className="font-medium text-slate-600 dark:text-slate-400">2. PRECIPITATION (48H)</span>
+                          <span className="font-mono font-bold text-orange-600 dark:text-orange-400">+{shapContribs.rainfall_48h || 30}%</span>
                         </div>
-                        <div className="h-4 w-full bg-[#111111] border border-[#333333]">
-                          <div className="h-full bg-[#525252]" style={{ width: `${shapContribs.tide_velocity || 15}%` }}></div>
+                        <div className="h-2.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                          <div className="h-full bg-orange-500 rounded-full" style={{ width: `${shapContribs.rainfall_48h || 30}%` }}></div>
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col gap-1.5">
+                        <div className="flex justify-between text-xs">
+                          <span className="font-medium text-slate-600 dark:text-slate-400">3. TIDAL CURRENT VECTOR</span>
+                          <span className="font-mono font-bold text-slate-700 dark:text-slate-300">+{shapContribs.tide_velocity || 15}%</span>
+                        </div>
+                        <div className="h-2.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                          <div className="h-full bg-slate-400 rounded-full" style={{ width: `${shapContribs.tide_velocity || 15}%` }}></div>
                         </div>
                       </div>
                     </>
@@ -213,35 +215,37 @@ export default function ModelLab() {
           </div>
 
           {/* Bento Card 2: YOLO11 Ticker */}
-          <div className="lg:col-span-4 bg-[#050505] flex flex-col justify-between">
-            <div className="p-6 border-b-2 border-[#333333] flex items-center gap-4 bg-[#111111]">
-              <BrainCircuit className="w-6 h-6 text-white" />
-              <div className="flex flex-col gap-1">
-                <h2 className="text-xl font-headline font-black text-white uppercase tracking-tighter">YOLO11 VISION</h2>
-                <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#a3a3a3]">TACO WEIGHTS</span>
+          <div className="lg:col-span-4 bg-white dark:bg-card border border-slate-200 dark:border-border/70 rounded-2xl shadow-sm flex flex-col justify-between overflow-hidden">
+            <div className="p-5 border-b border-slate-100 dark:border-border/60 flex items-center gap-3 bg-slate-50 dark:bg-muted/40">
+              <div className="p-2 bg-emerald-50 dark:bg-emerald-950/40 rounded-lg border border-emerald-200 dark:border-emerald-800/60 text-emerald-600 dark:text-emerald-400">
+                <BrainCircuit className="w-5 h-5" />
+              </div>
+              <div className="flex flex-col">
+                <h2 className="text-base font-sans font-bold text-slate-900 dark:text-white">YOLO11 UNDERWATER</h2>
+                <span className="text-xs font-mono text-slate-400">TACO EMBEDDINGS</span>
               </div>
             </div>
 
-            <div className="flex flex-col flex-1 p-6 gap-[1px] bg-[#333333]">
+            <div className="flex flex-col flex-1 divide-y divide-slate-100 dark:divide-border/40">
               {[
-                { label: 'PRECISION', value: '0.92', desc: 'TRUE POSITIVE' },
-                { label: 'RECALL', value: '0.88', desc: 'SENSITIVITY' },
-                { label: 'MAP @ 50', value: '0.91', desc: 'IEEE TARGET' },
+                { label: 'PRECISION', value: '0.92', desc: 'TRUE POSITIVE RATE' },
+                { label: 'RECALL', value: '0.88', desc: 'COVERAGE SENSITIVITY' },
+                { label: 'mAP @ 50', value: '0.91', desc: 'IEEE BENCHMARK' },
                 { label: 'F1-SCORE', value: '0.90', desc: 'HARMONIC MEAN' },
               ].map((metric, i) => (
-                <div key={i} className="flex items-center justify-between p-6 bg-[#000000] hover:bg-[#111111] transition-none group">
-                  <div className="flex flex-col gap-1 font-mono text-[10px] uppercase font-bold tracking-widest">
-                    <span className="text-[#a3a3a3] group-hover:text-white">{metric.label}</span>
-                    <span className="text-[#525252]">{metric.desc}</span>
+                <div key={i} className="flex items-center justify-between p-4 hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
+                  <div className="flex flex-col">
+                    <span className="text-xs font-bold text-slate-700 dark:text-slate-300">{metric.label}</span>
+                    <span className="text-[11px] text-slate-400">{metric.desc}</span>
                   </div>
-                  <span className={`text-3xl font-headline font-black ${i === 2 ? 'text-[#ff4d00]' : 'text-white'}`}>{metric.value}</span>
+                  <span className={`text-2xl font-sans font-bold font-mono ${i === 2 ? 'text-orange-600 dark:text-orange-400' : 'text-slate-900 dark:text-white'}`}>{metric.value}</span>
                 </div>
               ))}
             </div>
 
-            <div className="p-6 border-t-2 border-[#333333] bg-[#111111] text-[10px] font-mono text-[#a3a3a3] font-bold uppercase tracking-widest flex items-center justify-between">
+            <div className="p-4 border-t border-slate-100 dark:border-border/60 bg-slate-50 dark:bg-muted/40 text-xs font-medium text-slate-600 dark:text-slate-400 flex items-center justify-between">
               <span>LATENCY (CLAHE+YOLO):</span>
-              <span className="text-white">14.8 MS / 67 FPS</span>
+              <span className="text-slate-900 dark:text-white font-mono font-bold">14.8 MS / 67 FPS</span>
             </div>
           </div>
 
@@ -251,23 +255,23 @@ export default function ModelLab() {
         <AccuracyEvaluator />
 
         {/* Active Learning & Retrain Audit Registry */}
-        <div className="flex flex-col gap-6 pt-4">
-          <div className="flex items-center justify-between pb-4 border-b-2 border-[#333333]">
-            <div className="flex items-center gap-3">
-              <GitBranch className="w-5 h-5 text-[#ff4d00]" />
-              <h3 className="font-headline font-black text-2xl uppercase tracking-tighter text-white">
+        <div className="flex flex-col gap-4 pt-2">
+          <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-border/70">
+            <div className="flex items-center gap-2.5">
+              <GitBranch className="w-5 h-5 text-orange-500" />
+              <h3 className="font-sans font-bold text-xl text-slate-900 dark:text-white">
                 Retrain Audit Registry
               </h3>
             </div>
-            <span className="text-[10px] font-mono text-[#a3a3a3] uppercase font-bold tracking-widest">
+            <span className="text-xs font-mono text-slate-500 dark:text-slate-400 uppercase font-semibold">
               CONTINUOUS WEIGHT ITERATIONS
             </span>
           </div>
 
-          <div className="w-full bg-[#000000] border-2 border-[#333333] overflow-x-auto">
-            <table className="w-full text-left border-collapse font-mono text-xs">
+          <div className="w-full bg-white dark:bg-card border border-slate-200 dark:border-border/70 rounded-2xl shadow-sm overflow-hidden overflow-x-auto">
+            <table className="w-full text-left border-collapse text-xs">
               <thead>
-                <tr className="border-b-2 border-[#333333] bg-[#111111] text-[10px] text-[#a3a3a3] uppercase tracking-widest font-bold">
+                <tr className="border-b border-slate-200 dark:border-border/70 bg-slate-50 dark:bg-muted/40 text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold text-[11px]">
                   <th className="p-4">RUN REF</th>
                   <th className="p-4">MODEL TAG</th>
                   <th className="p-4">EXECUTION TIMESTAMP</th>
@@ -277,25 +281,25 @@ export default function ModelLab() {
                   <th className="p-4 text-right">AUDIT STATUS</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#222222]">
+              <tbody className="divide-y divide-slate-100 dark:divide-border/40">
                 {retrainHistory.length === 0 ? (
                   <tr>
-                    <td colSpan={7} className="p-8 text-center text-[#525252] font-mono uppercase tracking-widest font-bold">
+                    <td colSpan={7} className="p-8 text-center text-slate-400 font-mono text-xs">
                       INITIALIZING ACTIVE RETRAIN TELEMETRY PIPELINE...
                     </td>
                   </tr>
                 ) : (
                   retrainHistory.map((item, idx) => (
-                    <tr key={item.id || idx} className="hover:bg-[#0a0a0a] transition-none">
-                      <td className="p-4 font-bold text-white">#RT-{item.id}</td>
-                      <td className="p-4 text-[#ff4d00] font-headline font-black">{item.model_version || 'v2.5-prod'}</td>
-                      <td className="p-4 text-[#a3a3a3] text-[11px]">{new Date(item.timestamp).toLocaleString()}</td>
-                      <td className="p-4 text-white font-bold">{item.samples_processed?.toLocaleString() || '4,820'} SAMPLES</td>
-                      <td className="p-4 text-white font-bold">{item.mae ? item.mae.toFixed(1) : '14.2'} KG</td>
-                      <td className="p-4 text-emerald-400 font-headline font-black">{item.r2 ? item.r2.toFixed(2) : '0.89'}</td>
+                    <tr key={item.id || idx} className="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
+                      <td className="p-4 font-mono font-bold text-slate-900 dark:text-white">#RT-{item.id}</td>
+                      <td className="p-4 text-orange-600 dark:text-orange-400 font-mono font-bold">{item.model_version || 'v2.5-prod'}</td>
+                      <td className="p-4 text-slate-500 dark:text-slate-400 font-mono text-[11px]">{new Date(item.timestamp).toLocaleString()}</td>
+                      <td className="p-4 text-slate-800 dark:text-slate-200 font-mono font-medium">{item.samples_processed?.toLocaleString() || '4,820'} SAMPLES</td>
+                      <td className="p-4 text-slate-900 dark:text-white font-mono font-bold">{item.mae ? item.mae.toFixed(1) : '14.2'} KG</td>
+                      <td className="p-4 text-emerald-600 dark:text-emerald-400 font-mono font-bold">{item.r2 ? item.r2.toFixed(2) : '0.89'}</td>
                       <td className="p-4 text-right">
-                        <span className="px-2.5 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-[9px] font-bold uppercase tracking-widest inline-flex items-center gap-1.5">
-                          <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+                        <span className="px-2.5 py-1 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/60 text-xs font-semibold rounded-md inline-flex items-center gap-1.5">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
                           {item.status}
                         </span>
                       </td>

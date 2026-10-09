@@ -82,6 +82,11 @@ export interface SimState {
   currentFrameIndex: number;
   isPlaying: boolean;
   
+  // Theme Mode
+  theme: 'dark' | 'light';
+  toggleTheme: () => void;
+  setTheme: (theme: 'dark' | 'light') => void;
+
   // Actions
   setActiveMissionZone: (zoneId: string) => void;
   setSelectedLocation: (loc: OutfallLocation) => void;
@@ -94,6 +99,29 @@ export interface SimState {
   togglePlay: () => void;
   setIsPlaying: (isPlaying: boolean) => void;
 }
+
+const applyThemeToDOM = (theme: 'dark' | 'light') => {
+  if (typeof document !== 'undefined') {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+    } else {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
+    }
+  }
+};
+
+const getInitialTheme = (): 'dark' | 'light' => {
+  try {
+    const saved = localStorage.getItem('tidal_theme');
+    if (saved === 'light' || saved === 'dark') return saved;
+  } catch {}
+  return 'dark';
+};
+
+const initialTheme = getInitialTheme();
+applyThemeToDOM(initialTheme);
 
 export const useSim = create<SimState>((set) => ({
   activeMission: {
@@ -122,6 +150,25 @@ export const useSim = create<SimState>((set) => ({
   trajectoryBaseline: [],
   currentFrameIndex: 0,
   isPlaying: false,
+  
+  theme: initialTheme,
+  setTheme: (theme) => {
+    try {
+      localStorage.setItem('tidal_theme', theme);
+    } catch {}
+    applyThemeToDOM(theme);
+    set({ theme });
+  },
+  toggleTheme: () => {
+    set((state) => {
+      const nextTheme = state.theme === 'dark' ? 'light' : 'dark';
+      try {
+        localStorage.setItem('tidal_theme', nextTheme);
+      } catch {}
+      applyThemeToDOM(nextTheme);
+      return { theme: nextTheme };
+    });
+  },
   
   setActiveMissionZone: (zoneId) => {
     const loc = OUTFALL_LOCATIONS.find(l => l.id.toLowerCase() === zoneId.toLowerCase()) || OUTFALL_LOCATIONS[0];

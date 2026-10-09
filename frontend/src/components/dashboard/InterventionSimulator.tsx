@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { Zap, ShieldCheck, Users, Clock, Square, ArrowRight } from 'lucide-react';
+import { Zap, ShieldCheck, Users, Clock, ArrowRight } from 'lucide-react';
 import { useSim } from '../../store';
 
 interface InterventionSimulatorProps {
@@ -78,26 +78,28 @@ export const InterventionSimulator = ({
   const activeScenario = scenarios.find(s => s.id === activeScenarioId) || scenarios[0];
 
   return (
-    <div className="flex flex-col gap-6 mt-4">
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-[#333333] pb-4">
-        <div className="flex items-center gap-4">
-          <Square className="w-5 h-5 fill-white text-white" />
-          <div className="flex flex-col gap-1">
-            <h3 className="font-headline font-black text-2xl text-white uppercase tracking-tighter">Intervention Simulator</h3>
-            <span className="text-[10px] font-mono text-[#a3a3a3] uppercase font-bold tracking-widest">
+    <div className="flex flex-col gap-6 mt-2">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-200 dark:border-border/70 pb-4">
+        <div className="flex items-center gap-3">
+          <div className="p-2 bg-orange-50 dark:bg-orange-950/40 border border-orange-200 dark:border-orange-900/40 rounded-lg">
+            <Zap className="w-5 h-5 text-orange-500" />
+          </div>
+          <div className="flex flex-col">
+            <h3 className="font-sans font-bold text-xl sm:text-2xl text-slate-900 dark:text-white tracking-tight">Intervention Simulator</h3>
+            <span className="text-xs text-slate-500 dark:text-slate-400">
               Countermeasure Impact Modeling for {zoneName}
             </span>
           </div>
         </div>
-        <div className="flex items-center gap-3">
-          <span className="text-[10px] font-mono text-[#ff4d00] uppercase font-bold tracking-widest">
-            [ CLICK SCENARIO TO PREDICT DELTAS ]
+        <div className="flex items-center gap-2">
+          <span className="text-xs font-mono text-orange-600 dark:text-orange-400 font-semibold uppercase tracking-wider">
+            [ Click scenario to predict deltas ]
           </span>
         </div>
       </div>
       
       {/* 4 Interactive Scenario Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[1px] bg-[#333333] border-2 border-[#333333]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {scenarios.map((scenario) => {
           const isActive = activeScenarioId === scenario.id;
           const Icon = scenario.icon;
@@ -106,35 +108,39 @@ export const InterventionSimulator = ({
             <div 
               key={scenario.id} 
               onClick={() => onSelectScenario?.(scenario.id)}
-              className={`p-6 cursor-pointer flex flex-col justify-between gap-6 transition-none ${
+              className={`p-5 cursor-pointer rounded-2xl flex flex-col justify-between gap-4 transition-all shadow-sm ${
                 isActive
-                  ? 'bg-[#111111] border-l-4 border-l-[#ff4d00] ring-1 ring-[#ff4d00]'
-                  : 'bg-[#000000] border-l-4 border-l-transparent hover:bg-[#0a0a0a]'
+                  ? 'bg-orange-50/40 dark:bg-orange-950/30 border-2 border-orange-500 shadow-md'
+                  : 'bg-white dark:bg-card border border-slate-200 dark:border-border/70 hover:border-slate-300 dark:hover:border-slate-700'
               }`}
             >
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-3">
                 <div className="flex items-center justify-between">
-                  <Icon className={`w-6 h-6 ${isActive ? 'text-[#ff4d00]' : 'text-white'}`} />
+                  <div className={`p-2 rounded-lg ${isActive ? 'bg-orange-500 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300'}`}>
+                    <Icon className="w-4 h-4" />
+                  </div>
                   {isActive && (
-                    <span className="text-[9px] font-mono font-bold uppercase tracking-widest px-2 py-0.5 bg-white text-black">
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 bg-orange-500 text-white rounded-md">
                       ACTIVE SCENARIO
                     </span>
                   )}
                 </div>
 
-                <div className="flex flex-col gap-2">
-                  <h4 className={`font-headline font-black text-sm uppercase ${isActive ? 'text-[#ff4d00]' : 'text-white'}`}>
+                <div className="flex flex-col gap-1.5">
+                  <h4 className={`font-sans font-bold text-sm tracking-tight ${isActive ? 'text-orange-600 dark:text-orange-400' : 'text-slate-900 dark:text-white'}`}>
                     {scenario.title}
                   </h4>
-                  <p className="text-[10px] font-mono uppercase tracking-widest text-[#a3a3a3] font-bold border-l-2 border-[#333333] pl-2 leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                     {scenario.desc}
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-center justify-between pt-4 border-t-2 border-[#333333] font-mono text-[10px] uppercase font-bold tracking-widest">
-                <span className="text-[#a3a3a3]">{scenario.impactLabel}</span>
-                <span className={scenario.impactColor}>{scenario.impactValue}</span>
+              <div className="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-800/80 text-xs font-semibold">
+                <span className="text-slate-400 dark:text-slate-500 uppercase text-[11px]">{scenario.impactLabel}</span>
+                <span className={`font-mono font-bold ${isActive ? 'text-orange-600 dark:text-orange-400' : 'text-slate-800 dark:text-slate-200'}`}>
+                  {scenario.impactValue}
+                </span>
               </div>
             </div>
           );
@@ -142,17 +148,17 @@ export const InterventionSimulator = ({
       </div>
 
       {/* Active Scenario Action Bar */}
-      <div className="p-4 bg-[#111111] border-2 border-[#333333] flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs uppercase font-bold tracking-widest">
+      <div className="p-4 bg-white dark:bg-card border border-slate-200 dark:border-border/70 rounded-xl shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-semibold">
         <div className="flex items-center gap-3">
-          <span className="w-2 h-2 bg-[#ff4d00] animate-ping"></span>
-          <span className="text-[#a3a3a3]">SELECTED INTERVENTION:</span>
-          <span className="text-white">{activeScenario.title}</span>
-          <span className="text-[#ff4d00]">({activeScenario.impactValue})</span>
+          <span className="w-2.5 h-2.5 bg-orange-500 rounded-full animate-ping"></span>
+          <span className="text-slate-500 dark:text-slate-400 uppercase">SELECTED INTERVENTION:</span>
+          <span className="text-slate-900 dark:text-white font-bold">{activeScenario.title}</span>
+          <span className="text-orange-600 dark:text-orange-400 font-mono font-bold">({activeScenario.impactValue})</span>
         </div>
 
         <button
           onClick={() => handleApplyTo3DTwin(activeScenario)}
-          className="px-5 py-2.5 bg-white hover:bg-[#ff4d00] text-black font-headline font-black text-[11px] uppercase tracking-widest transition-none flex items-center gap-2"
+          className="px-5 py-2.5 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold text-xs uppercase tracking-wider rounded-lg shadow-sm hover:shadow transition-all flex items-center gap-2"
         >
           <span>SIMULATE SCENARIO IN 3D TWIN</span>
           <ArrowRight className="w-4 h-4" />

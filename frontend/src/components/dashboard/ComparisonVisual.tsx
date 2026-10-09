@@ -62,81 +62,89 @@ export const ComparisonVisual = ({ activeScenarioId = 1, selectedZone }: Compari
   const metrics = getScenarioMetrics();
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-[1px] bg-[#333333] border-2 border-[#333333]">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
       
       {/* Conventional Reactionary Cleanups (Without TIDAL) */}
-      <div className="bg-[#050505] p-8 flex flex-col justify-between gap-8 relative group">
-        <div className="absolute top-0 right-0 px-4 py-2 bg-[#111111] text-[#a3a3a3] border-b-2 border-l-2 border-[#333333] font-mono text-[10px] font-bold uppercase tracking-widest">
-          CONVENTIONAL CLEANUP
+      <div className="bg-white dark:bg-card border border-slate-200 dark:border-border/70 rounded-2xl p-6 sm:p-8 flex flex-col justify-between gap-6 relative shadow-sm">
+        <div className="flex items-center justify-between">
+          <span className="px-2.5 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono text-xs font-semibold uppercase tracking-wider rounded-md border border-slate-200 dark:border-slate-700">
+            CONVENTIONAL CLEANUP
+          </span>
         </div>
         
-        <div className="flex items-center gap-6 mt-4">
-          <XCircle className="w-8 h-8 text-white shrink-0" />
-          <div className="flex flex-col gap-1">
-            <h4 className="font-headline font-black text-2xl text-white uppercase tracking-tighter">WITHOUT TIDAL</h4>
-            <p className="text-[10px] font-mono text-[#a3a3a3] uppercase font-bold tracking-widest">Reactionary Manual Sweeps</p>
+        <div className="flex items-center gap-4">
+          <div className="p-3 bg-slate-100 dark:bg-slate-800 rounded-xl text-slate-500">
+            <XCircle className="w-6 h-6 shrink-0" />
+          </div>
+          <div className="flex flex-col">
+            <h4 className="font-sans font-bold text-xl sm:text-2xl text-slate-900 dark:text-white tracking-tight">WITHOUT TIDAL</h4>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Reactionary Manual Sweeps</p>
           </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-[1px] bg-[#333333] border border-[#333333]">
-          <div className="p-4 bg-[#000000] flex flex-col gap-1.5">
-            <span className="text-[10px] font-mono text-[#a3a3a3] uppercase font-bold tracking-widest">Recovery</span>
-            <span className="font-headline font-black text-3xl text-white">38%</span>
-            <span className="text-[8px] font-mono text-[#737373] uppercase">Manual Limit</span>
+        <div className="grid grid-cols-3 gap-3">
+          <div className="p-3.5 bg-slate-50 dark:bg-muted/30 border border-slate-100 dark:border-border/50 rounded-xl flex flex-col gap-1">
+            <span className="text-[11px] text-slate-400 uppercase font-semibold">Recovery</span>
+            <span className="font-sans font-bold text-2xl text-slate-700 dark:text-slate-300 font-mono">38%</span>
+            <span className="text-[10px] text-slate-400 uppercase">Manual Limit</span>
           </div>
-          <div className="p-4 bg-[#000000] flex flex-col gap-1.5">
-            <span className="text-[10px] font-mono text-[#a3a3a3] uppercase font-bold tracking-widest">Impact</span>
-            <span className="font-headline font-black text-3xl text-white">72H+</span>
-            <span className="text-[8px] font-mono text-[#737373] uppercase">Lag Time</span>
+          <div className="p-3.5 bg-slate-50 dark:bg-muted/30 border border-slate-100 dark:border-border/50 rounded-xl flex flex-col gap-1">
+            <span className="text-[11px] text-slate-400 uppercase font-semibold">Impact</span>
+            <span className="font-sans font-bold text-2xl text-slate-700 dark:text-slate-300 font-mono">72H+</span>
+            <span className="text-[10px] text-slate-400 uppercase">Lag Time</span>
           </div>
-          <div className="p-4 bg-[#000000] flex flex-col gap-1.5">
-            <span className="text-[10px] font-mono text-[#a3a3a3] uppercase font-bold tracking-widest">Efficiency</span>
-            <span className="font-headline font-black text-3xl text-white">LOW</span>
-            <span className="text-[8px] font-mono text-[#737373] uppercase">Dispersed</span>
+          <div className="p-3.5 bg-slate-50 dark:bg-muted/30 border border-slate-100 dark:border-border/50 rounded-xl flex flex-col gap-1">
+            <span className="text-[11px] text-slate-400 uppercase font-semibold">Efficiency</span>
+            <span className="font-sans font-bold text-2xl text-slate-700 dark:text-slate-300 font-mono">LOW</span>
+            <span className="text-[10px] text-slate-400 uppercase">Dispersed</span>
           </div>
         </div>
 
-        <p className="text-xs font-mono uppercase font-bold tracking-widest text-[#a3a3a3] leading-relaxed border-l-2 border-[#525252] pl-4">
+        <p className="text-xs leading-relaxed text-slate-500 dark:text-slate-400 border-l-2 border-slate-200 dark:border-slate-700 pl-3">
           Debris fragments into toxic microplastics upon crashing onto rocky seawalls before crews arrive, causing severe ecological contamination and exponentially higher manual retrieval costs.
         </p>
       </div>
 
       {/* With TIDAL Autonomous Prediction (Adaptive Scenario Deltas) */}
-      <div className="bg-[#111111] p-8 flex flex-col justify-between gap-8 relative group border-l-4 border-l-[#ff4d00]">
-        <div className="absolute top-0 right-0 px-4 py-2 bg-white text-black border-b-2 border-l-2 border-white font-mono text-[10px] font-bold uppercase tracking-widest flex items-center gap-2">
-          <Zap className="w-3 h-3 fill-black" />
-          <span>PREDICTION-DRIVEN</span>
+      <div className="bg-gradient-to-br from-white via-orange-50/30 to-white dark:from-card dark:via-orange-950/20 dark:to-card border-2 border-orange-500/80 rounded-2xl p-6 sm:p-8 flex flex-col justify-between gap-6 relative shadow-md">
+        <div className="flex items-center justify-between">
+          <span className="px-2.5 py-1 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-mono text-xs font-bold uppercase tracking-wider rounded-md flex items-center gap-1.5 shadow-sm">
+            <Zap className="w-3.5 h-3.5 fill-current" />
+            <span>PREDICTION-DRIVEN</span>
+          </span>
         </div>
         
-        <div className="flex items-center gap-6 mt-4">
-          <Square className="w-8 h-8 fill-[#ff4d00] text-[#ff4d00] shrink-0" />
-          <div className="flex flex-col gap-1">
-            <h4 className="font-headline font-black text-2xl text-white uppercase tracking-tighter">WITH TIDAL</h4>
-            <p className="text-[10px] font-mono text-[#ff4d00] uppercase font-bold tracking-widest">
+        <div className="flex items-center gap-4">
+          <div className="p-3 bg-orange-100 dark:bg-orange-950/60 rounded-xl text-orange-500">
+            <Square className="w-6 h-6 fill-orange-500 text-orange-500 shrink-0" />
+          </div>
+          <div className="flex flex-col">
+            <h4 className="font-sans font-bold text-xl sm:text-2xl text-slate-900 dark:text-white tracking-tight">WITH TIDAL</h4>
+            <p className="text-xs text-orange-600 dark:text-orange-400 font-medium">
               Adaptive Countermeasure Active
             </p>
           </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-[1px] bg-[#333333] border border-[#333333]">
-          <div className="p-4 bg-[#050505] flex flex-col gap-1.5">
-            <span className="text-[10px] font-mono text-[#a3a3a3] uppercase font-bold tracking-widest">Recovery</span>
-            <span className="font-headline font-black text-3xl text-[#ff4d00]">{metrics.recovery}%</span>
-            <span className="text-[8px] font-mono text-[#00e5ff] font-bold uppercase">{metrics.recoveryDelta} Delta</span>
+        <div className="grid grid-cols-3 gap-3">
+          <div className="p-3.5 bg-orange-50/60 dark:bg-orange-950/30 border border-orange-200/80 dark:border-orange-850/50 rounded-xl flex flex-col gap-1">
+            <span className="text-[11px] text-slate-500 dark:text-slate-400 uppercase font-semibold">Recovery</span>
+            <span className="font-sans font-bold text-2xl text-orange-600 dark:text-orange-400 font-mono">{metrics.recovery}%</span>
+            <span className="text-[11px] font-mono text-sky-600 dark:text-sky-400 font-bold">{metrics.recoveryDelta} Delta</span>
           </div>
-          <div className="p-4 bg-[#050505] flex flex-col gap-1.5">
-            <span className="text-[10px] font-mono text-[#a3a3a3] uppercase font-bold tracking-widest">Clearance</span>
-            <span className="font-headline font-black text-3xl text-white">{metrics.clearance}</span>
-            <span className="text-[8px] font-mono text-[#10b981] font-bold uppercase">{metrics.clearanceDelta} Speedup</span>
+          <div className="p-3.5 bg-orange-50/60 dark:bg-orange-950/30 border border-orange-200/80 dark:border-orange-850/50 rounded-xl flex flex-col gap-1">
+            <span className="text-[11px] text-slate-500 dark:text-slate-400 uppercase font-semibold">Clearance</span>
+            <span className="font-sans font-bold text-2xl text-slate-900 dark:text-white font-mono">{metrics.clearance}</span>
+            <span className="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 font-bold">{metrics.clearanceDelta} Speedup</span>
           </div>
-          <div className="p-4 bg-[#050505] flex flex-col gap-1.5">
-            <span className="text-[10px] font-mono text-[#a3a3a3] uppercase font-bold tracking-widest">Efficiency</span>
-            <span className="font-headline font-black text-3xl text-white">{metrics.efficiency}</span>
-            <span className="text-[8px] font-mono text-[#ff4d00] font-bold uppercase">Optimized</span>
+          <div className="p-3.5 bg-orange-50/60 dark:bg-orange-950/30 border border-orange-200/80 dark:border-orange-850/50 rounded-xl flex flex-col gap-1">
+            <span className="text-[11px] text-slate-500 dark:text-slate-400 uppercase font-semibold">Efficiency</span>
+            <span className="font-sans font-bold text-2xl text-emerald-600 dark:text-emerald-400 font-mono">{metrics.efficiency}</span>
+            <span className="text-[11px] font-mono text-orange-600 dark:text-orange-400 font-bold">Optimized</span>
           </div>
         </div>
 
-        <p className="text-xs font-mono uppercase font-bold tracking-widest text-white leading-relaxed border-l-2 border-[#ff4d00] pl-4">
+        <p className="text-xs leading-relaxed text-slate-700 dark:text-slate-300 border-l-2 border-orange-500 pl-3 font-medium">
           {metrics.desc}
         </p>
       </div>

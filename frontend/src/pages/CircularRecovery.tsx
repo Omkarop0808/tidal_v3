@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { 
   Camera, 
   Upload, 
-  ShieldCheck, 
   PlayCircle, 
   StopCircle, 
   Sparkles, 
@@ -111,72 +110,72 @@ export default function CircularRecovery() {
   const totalCredits = manifests.reduce((acc, m) => acc + (m.epr_credits || 0), 0);
 
   return (
-    <main className="w-full bg-[#050505] min-h-screen text-white px-4 sm:px-8 lg:px-12 py-8 max-w-[1600px] mx-auto border-x-2 border-[#333333]">
-      <div className="flex flex-col gap-12">
+    <main className="w-full bg-slate-50 dark:bg-background min-h-screen text-slate-900 dark:text-slate-100 px-4 sm:px-8 lg:px-12 py-8 max-w-[1600px] mx-auto font-sans transition-colors duration-200">
+      <div className="flex flex-col gap-10">
         
         {/* Header Bar */}
-        <div className="flex flex-col gap-4 pb-8 border-b-2 border-[#333333]">
-          <div className="flex items-center gap-4">
-            <span className="px-4 py-2 bg-white text-black font-mono text-[10px] uppercase font-bold tracking-widest flex items-center gap-2">
-              <Recycle className="w-4 h-4" />
+        <div className="flex flex-col gap-3 pb-6 border-b border-slate-200 dark:border-border/70">
+          <div className="flex items-center gap-3">
+            <span className="px-2.5 py-1 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/60 font-mono text-xs uppercase font-semibold rounded-md flex items-center gap-1.5">
+              <Recycle className="w-3.5 h-3.5 text-emerald-500" />
               CIRCULAR VALUATION
             </span>
-            <span className="text-[#ff4d00] font-mono text-[10px] uppercase font-bold tracking-widest">
+            <span className="text-orange-600 dark:text-orange-400 font-mono text-xs uppercase font-semibold tracking-wider">
               // YOLO11 + GEMINI PIPELINE
             </span>
           </div>
-          <h1 className="text-4xl sm:text-6xl font-headline font-black tracking-tighter uppercase text-white">
+          <h1 className="text-3xl sm:text-5xl font-sans font-extrabold uppercase tracking-tight text-slate-900 dark:text-white">
             Upcycler Exchange
           </h1>
-          <p className="text-sm font-mono text-[#a3a3a3] uppercase font-bold tracking-widest max-w-3xl leading-relaxed border-l-4 border-[#ff4d00] pl-4">
+          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-3xl leading-relaxed border-l-2 border-emerald-500 pl-4">
             Upload field drone imagery or activate the live coastal camera stream. YOLO11 executes classification, while Gemini determines polymer composition, calculates real-time spot valuation, and matches local upcycling facilities.
           </p>
         </div>
 
         {/* 2-Column Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-[1px] bg-[#333333] border-2 border-[#333333]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
           
           {/* Left: Drone Feed / Vision Upload Viewport (6 cols) */}
-          <div className="lg:col-span-6 bg-[#000000] p-8 flex flex-col justify-between gap-8 group">
-            <div className="relative w-full h-[500px] bg-[#111111] border-2 border-[#333333] overflow-hidden flex items-center justify-center">
+          <div className="lg:col-span-6 bg-white dark:bg-card border border-slate-200 dark:border-border/70 rounded-2xl shadow-sm p-6 sm:p-8 flex flex-col justify-between gap-6">
+            <div className="relative w-full h-[480px] bg-slate-900 rounded-xl border border-slate-200 dark:border-border/70 overflow-hidden flex items-center justify-center shadow-inner">
               
               {isLiveMode ? (
-                <div className="absolute inset-0 bg-[#000000] overflow-hidden flex flex-col justify-center items-center">
+                <div className="absolute inset-0 bg-slate-950 overflow-hidden flex flex-col justify-center items-center">
                   <div className="absolute top-4 left-4 right-4 z-20 flex flex-wrap items-center justify-between gap-4 pointer-events-none">
-                    <div className="flex items-center gap-3 px-4 py-2 bg-black border-2 border-[#ff4d00] text-[10px] font-mono text-[#ff4d00] font-bold uppercase tracking-widest pointer-events-auto">
-                      <span className="w-2 h-2 bg-[#ff4d00] animate-ping"></span>
+                    <div className="flex items-center gap-2.5 px-3 py-1.5 bg-black/80 backdrop-blur-md border border-orange-500 text-xs font-mono text-orange-400 font-bold uppercase rounded-lg pointer-events-auto">
+                      <span className="w-2 h-2 bg-orange-500 rounded-full animate-ping"></span>
                       <span>LIVE FEED // SEC-04</span>
                     </div>
 
                     <button 
                       onClick={() => setIsClaheActive(!isClaheActive)}
-                      className={`px-4 py-2 font-mono text-[10px] uppercase font-bold tracking-widest border-2 pointer-events-auto transition-none flex items-center gap-2 ${
+                      className={`px-3 py-1.5 font-mono text-xs uppercase font-bold rounded-lg border pointer-events-auto transition-all flex items-center gap-2 ${
                         isClaheActive 
-                          ? 'bg-white text-black border-white' 
-                          : 'bg-black text-[#525252] border-[#333333]'
+                          ? 'bg-white text-slate-900 border-white shadow-sm' 
+                          : 'bg-black/80 text-slate-400 border-slate-700'
                       }`}
                     >
-                      <Sliders className="w-4 h-4" />
+                      <Sliders className="w-3.5 h-3.5" />
                       <span>CLAHE: {isClaheActive ? 'ON' : 'OFF'}</span>
                     </button>
                   </div>
 
-                  <div className={`relative w-full h-full bg-[url('https://images.unsplash.com/photo-1621451537084-482c73073e0f?auto=format&fit=crop&q=80&w=1000')] bg-cover bg-center transition-none ${
-                    isClaheActive ? 'filter grayscale contrast-125' : 'opacity-50 grayscale'
+                  <div className={`relative w-full h-full bg-[url('https://images.unsplash.com/photo-1621451537084-482c73073e0f?auto=format&fit=crop&q=80&w=1000')] bg-cover bg-center ${
+                    isClaheActive ? 'filter grayscale contrast-125' : 'opacity-60 grayscale'
                   }`}>
-                    <div className="absolute border-2 border-[#ff4d00] bg-[#ff4d00]/20 top-[38%] left-[28%] w-[20%] h-[22%] flex items-start justify-start p-2">
-                      <span className="bg-[#ff4d00] text-black font-mono text-[10px] uppercase font-bold tracking-widest px-2 py-1">
+                    <div className="absolute border-2 border-orange-500 bg-orange-500/20 top-[38%] left-[28%] w-[20%] h-[22%] flex items-start justify-start p-1.5 rounded">
+                      <span className="bg-orange-500 text-white font-mono text-[10px] uppercase font-bold px-1.5 py-0.5 rounded">
                         PET (88%)
                       </span>
                     </div>
 
-                    <div className="absolute border-2 border-white bg-white/20 top-[58%] left-[56%] w-[24%] h-[20%] flex items-start justify-start p-2">
-                      <span className="bg-white text-black font-mono text-[10px] uppercase font-bold tracking-widest px-2 py-1">
+                    <div className="absolute border-2 border-white bg-white/20 top-[58%] left-[56%] w-[24%] h-[20%] flex items-start justify-start p-1.5 rounded">
+                      <span className="bg-white text-slate-900 font-mono text-[10px] uppercase font-bold px-1.5 py-0.5 rounded">
                         NET (92%)
                       </span>
                     </div>
 
-                    <div className="absolute top-0 left-0 w-full h-1 bg-[#ff4d00] animate-pulse"></div>
+                    <div className="absolute top-0 left-0 w-full h-1 bg-orange-500 animate-pulse"></div>
                   </div>
                 </div>
               ) : selectedImage ? (
@@ -192,7 +191,7 @@ export default function CircularRecovery() {
                     return (
                       <div 
                         key={i}
-                        className="absolute border-2 border-white bg-white/10"
+                        className="absolute border-2 border-white bg-white/10 rounded"
                         style={{
                           top: `${(y1 / 480) * 100}%`,
                           left: `${(x1 / 640) * 100}%`,
@@ -200,7 +199,7 @@ export default function CircularRecovery() {
                           width: `${((x2 - x1) / 640) * 100}%`,
                         }}
                       >
-                        <span className="absolute -top-8 left-0 bg-white text-black font-mono text-[10px] uppercase px-2 py-1 font-bold whitespace-nowrap">
+                        <span className="absolute -top-7 left-0 bg-white text-slate-900 font-mono text-[10px] uppercase px-2 py-0.5 font-bold rounded shadow-sm whitespace-nowrap">
                           {box.label} {((box.confidence || 0.89) * 100).toFixed(0)}%
                         </span>
                       </div>
@@ -208,16 +207,16 @@ export default function CircularRecovery() {
                   })}
                 </div>
               ) : (
-                <div className="flex flex-col items-center gap-6 text-[#525252] p-8 text-center font-mono uppercase font-bold tracking-widest">
-                  <Camera className="w-16 h-16 text-[#333333]" />
-                  <div className="flex flex-col gap-2">
-                    <p className="text-white text-sm">AWAITING VISUAL TELEMETRY</p>
-                    <p className="text-[10px]">UPLOAD IMAGE OR START DRONE FEED</p>
+                <div className="flex flex-col items-center gap-4 text-slate-400 p-8 text-center font-mono">
+                  <Camera className="w-12 h-12 text-slate-500" />
+                  <div className="flex flex-col gap-1">
+                    <p className="text-white text-sm font-bold uppercase">Awaiting Visual Telemetry</p>
+                    <p className="text-xs text-slate-400">Upload shoreline image or start drone feed</p>
                   </div>
                 </div>
               )}
 
-              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col sm:flex-row items-center gap-4 z-30">
+              <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex flex-col sm:flex-row items-center gap-3 z-30">
                 <input 
                   type="file" 
                   ref={fileInputRef} 
@@ -228,18 +227,18 @@ export default function CircularRecovery() {
 
                 <button 
                   onClick={() => fileInputRef.current?.click()}
-                  className="px-6 py-3 bg-[#111111] hover:bg-white text-white hover:text-black font-headline font-bold text-xs uppercase tracking-widest border-2 border-[#333333] hover:border-white transition-none flex items-center gap-3"
+                  className="px-5 py-2.5 bg-white/95 dark:bg-card/95 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-900 dark:text-white font-semibold text-xs uppercase tracking-wider rounded-xl shadow-md border border-slate-200 dark:border-border/70 backdrop-blur-md transition-all flex items-center gap-2"
                 >
-                  <Upload className="w-4 h-4" />
-                  <span>UPLOAD</span>
+                  <Upload className="w-4 h-4 text-orange-500" />
+                  <span>UPLOAD IMAGE</span>
                 </button>
 
                 <button 
                   onClick={() => setIsLiveMode(!isLiveMode)}
-                  className={`px-6 py-3 font-headline font-black text-xs uppercase tracking-widest border-2 transition-none flex items-center gap-3 ${
+                  className={`px-5 py-2.5 font-bold text-xs uppercase tracking-wider rounded-xl shadow-md backdrop-blur-md transition-all flex items-center gap-2 ${
                     isLiveMode 
-                      ? 'bg-black text-[#ff4d00] border-[#ff4d00]' 
-                      : 'bg-white text-black border-white hover:bg-black hover:text-white'
+                      ? 'bg-rose-600 text-white hover:bg-rose-700' 
+                      : 'bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white'
                   }`}
                 >
                   {isLiveMode ? (
@@ -250,82 +249,82 @@ export default function CircularRecovery() {
                   ) : (
                     <>
                       <PlayCircle className="w-4 h-4" />
-                      <span>START FEED</span>
+                      <span>START LIVE FEED</span>
                     </>
                   )}
                 </button>
               </div>
 
               {isAnalyzing && (
-                <div className="absolute inset-0 bg-black/90 flex flex-col items-center justify-center gap-6 z-50">
-                  <Square className="w-12 h-12 text-white animate-spin border-4 border-white fill-transparent" />
-                  <p className="font-mono text-[10px] uppercase tracking-widest text-white font-bold bg-[#111111] px-4 py-2 border-2 border-[#333333]">
-                    ANALYZING TELEMETRY...
+                <div className="absolute inset-0 bg-black/80 backdrop-blur-sm flex flex-col items-center justify-center gap-4 z-50">
+                  <div className="w-10 h-10 border-4 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
+                  <p className="font-mono text-xs uppercase tracking-wider text-white font-bold bg-slate-900/90 px-4 py-2 rounded-lg border border-slate-700">
+                    ANALYZING POLYMERS...
                   </p>
                 </div>
               )}
             </div>
             
-            <div className="px-4 py-3 bg-[#111111] border-2 border-[#333333] text-[10px] font-mono text-[#a3a3a3] uppercase font-bold tracking-widest flex items-center gap-3">
-              <Sparkles className="w-4 h-4 text-white" />
-              <span>CLAHE ALGORITHM CLARIFIES MURKY COASTAL WATERS FOR NEURAL SEGMENTATION.</span>
+            <div className="px-4 py-3 bg-slate-50 dark:bg-muted/30 border border-slate-100 dark:border-border/50 rounded-xl text-xs text-slate-600 dark:text-slate-400 flex items-center gap-3">
+              <Sparkles className="w-4 h-4 text-orange-500 shrink-0" />
+              <span>CLAHE equalization filters turbidity for high-accuracy polymer segmentation.</span>
             </div>
           </div>
 
           {/* Right: Plastics Exchange HUD & Upcycler Matching (6 cols) */}
-          <div className="lg:col-span-6 bg-[#000000] p-8 flex flex-col gap-8">
-            <div className="flex items-center justify-between pb-4 border-b-2 border-[#333333]">
-              <h2 className="text-2xl font-headline font-black text-white uppercase tracking-tighter flex items-center gap-3">
-                <Square className="w-5 h-5 fill-white text-white" />
+          <div className="lg:col-span-6 bg-white dark:bg-card border border-slate-200 dark:border-border/70 rounded-2xl shadow-sm p-6 sm:p-8 flex flex-col gap-6 justify-between">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-border/70">
+              <h2 className="text-xl font-sans font-bold text-slate-900 dark:text-white flex items-center gap-2.5">
+                <Square className="w-4 h-4 fill-orange-500 text-orange-500" />
                 EXCHANGE TERMINAL
               </h2>
-              <span className="text-[10px] font-mono bg-white text-black px-3 py-1 font-bold uppercase tracking-widest">
+              <span className="text-xs font-mono bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/60 px-2.5 py-1 font-bold rounded-md uppercase">
                 LIVE MARKET
               </span>
             </div>
 
             {/* Live Spot Market Rates */}
-            <div className="flex flex-col gap-4">
-              <div className="flex justify-between items-center bg-[#111111] px-4 py-2 border-2 border-[#333333]">
-                <span className="text-[10px] font-mono uppercase tracking-widest text-white font-bold">
+            <div className="flex flex-col gap-3">
+              <div className="flex justify-between items-center bg-slate-50 dark:bg-muted/30 px-3.5 py-2 rounded-lg border border-slate-100 dark:border-border/50">
+                <span className="text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300">
                   SPOT POLYMER BENCHMARK
                 </span>
-                <span className="font-mono text-[10px] text-[#ff4d00] font-bold">UPDATED 5M AGO</span>
+                <span className="font-mono text-xs text-orange-600 dark:text-orange-400 font-bold">UPDATED 5M AGO</span>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-[1px] bg-[#333333] border-2 border-[#333333]">
-                <div className="p-4 bg-[#050505] flex flex-col gap-2">
-                  <div className="font-mono text-[10px] text-[#a3a3a3] uppercase font-bold tracking-widest">CLEAR PET</div>
-                  <div className="font-headline font-black text-2xl text-white">₹35.00</div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div className="p-3.5 bg-slate-50 dark:bg-muted/30 border border-slate-100 dark:border-border/50 rounded-xl flex flex-col gap-1">
+                  <div className="text-[11px] text-slate-400 uppercase font-semibold">CLEAR PET</div>
+                  <div className="font-sans font-bold text-xl text-slate-900 dark:text-white font-mono">₹35.00</div>
                 </div>
-                <div className="p-4 bg-[#050505] flex flex-col gap-2">
-                  <div className="font-mono text-[10px] text-[#a3a3a3] uppercase font-bold tracking-widest">RIGID HDPE</div>
-                  <div className="font-headline font-black text-2xl text-white">₹28.50</div>
+                <div className="p-3.5 bg-slate-50 dark:bg-muted/30 border border-slate-100 dark:border-border/50 rounded-xl flex flex-col gap-1">
+                  <div className="text-[11px] text-slate-400 uppercase font-semibold">RIGID HDPE</div>
+                  <div className="font-sans font-bold text-xl text-slate-900 dark:text-white font-mono">₹28.50</div>
                 </div>
-                <div className="p-4 bg-[#050505] flex flex-col gap-2">
-                  <div className="font-mono text-[10px] text-[#a3a3a3] uppercase font-bold tracking-widest">NYLON NETS</div>
-                  <div className="font-headline font-black text-2xl text-[#ff4d00]">₹42.00</div>
+                <div className="p-3.5 bg-slate-50 dark:bg-muted/30 border border-slate-100 dark:border-border/50 rounded-xl flex flex-col gap-1">
+                  <div className="text-[11px] text-slate-400 uppercase font-semibold">NYLON NETS</div>
+                  <div className="font-sans font-bold text-xl text-orange-600 dark:text-orange-400 font-mono">₹42.00</div>
                 </div>
               </div>
             </div>
 
             {/* Current Catch Valuation */}
-            <div className="flex flex-col gap-4 mt-4">
-              <h3 className="font-mono text-[10px] uppercase tracking-widest text-[#a3a3a3] font-bold">
-                BATCH ESTIMATION
+            <div className="flex flex-col gap-2 mt-2">
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                Batch Estimation
               </h3>
 
-              <div className="grid grid-cols-2 gap-[1px] bg-[#333333] border-2 border-[#333333]">
-                <div className="p-6 bg-[#000000] flex flex-col gap-2 border-l-4 border-l-white">
-                  <span className="font-mono text-[10px] text-[#a3a3a3] uppercase font-bold tracking-widest">CLASSIFIED MASS</span>
-                  <span className="text-4xl font-headline font-black text-white">
-                    {estimatedWeight.toFixed(1)} KG
+              <div className="grid grid-cols-2 gap-3">
+                <div className="p-5 bg-slate-50 dark:bg-muted/30 border border-slate-200 dark:border-border/60 rounded-xl flex flex-col gap-1">
+                  <span className="text-xs text-slate-500 dark:text-slate-400 uppercase font-semibold">Classified Mass</span>
+                  <span className="text-3xl font-sans font-extrabold text-slate-900 dark:text-white font-mono">
+                    {estimatedWeight.toFixed(1)} <span className="text-sm font-normal text-slate-400">KG</span>
                   </span>
                 </div>
 
-                <div className="p-6 bg-[#000000] flex flex-col gap-2 border-l-4 border-l-[#ff4d00]">
-                  <span className="font-mono text-[10px] text-[#a3a3a3] uppercase font-bold tracking-widest">GROSS VALUE</span>
-                  <span className="text-4xl font-headline font-black text-[#ff4d00]">
+                <div className="p-5 bg-orange-50/60 dark:bg-orange-950/30 border border-orange-200/80 dark:border-orange-850/50 rounded-xl flex flex-col gap-1">
+                  <span className="text-xs text-slate-500 dark:text-slate-400 uppercase font-semibold">Gross Value</span>
+                  <span className="text-3xl font-sans font-extrabold text-orange-600 dark:text-orange-400 font-mono">
                     ₹{grossValue}
                   </span>
                 </div>
@@ -333,58 +332,54 @@ export default function CircularRecovery() {
             </div>
 
             {/* Smart Upcycler Match Contract */}
-            <div className="mt-auto p-8 bg-[#111111] border-2 border-white flex flex-col gap-6 relative overflow-hidden group">
-              <div className="absolute -right-4 -bottom-4 opacity-5 pointer-events-none transition-transform group-hover:scale-110">
-                <ShieldCheck className="w-48 h-48 text-white" />
-              </div>
-
-              <div className="relative z-10 flex items-center justify-between border-b-2 border-[#333333] pb-4">
-                <span className="text-[10px] font-mono uppercase tracking-widest text-white font-bold flex items-center gap-2">
-                  <Square className="w-3 h-3 fill-white text-white" />
+            <div className="mt-2 p-6 bg-slate-50 dark:bg-muted/30 border border-slate-200 dark:border-border/70 rounded-2xl flex flex-col gap-4 relative overflow-hidden">
+              <div className="flex items-center justify-between border-b border-slate-200/80 dark:border-border/60 pb-3">
+                <span className="text-xs uppercase font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2">
+                  <Square className="w-3 h-3 fill-orange-500 text-orange-500" />
                   UPCYCLER CONTRACT
                 </span>
-                <span className="font-mono text-[10px] px-3 py-1 bg-white text-black font-bold uppercase tracking-widest">
-                  CERTIFIED
+                <span className="text-xs px-2.5 py-0.5 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/60 font-bold rounded">
+                  CERTIFIED PARTNER
                 </span>
               </div>
 
-              <div className="relative z-10 flex flex-col gap-2">
-                <h3 className="text-3xl font-headline font-black text-white uppercase tracking-tighter">
+              <div className="flex flex-col gap-1">
+                <h3 className="text-2xl font-sans font-bold text-slate-900 dark:text-white">
                   {isLiveMode ? 'LUCRO PLASTECYCLE' : (analysisResult?.matched_upcycler || 'LUCRO PLASTECYCLE')}
                 </h3>
-                <span className="text-[10px] font-mono text-[#a3a3a3] uppercase font-bold tracking-widest flex items-center gap-2">
-                  <Truck className="w-4 h-4 text-white" />
-                  DISTANCE: 12.4 KM VIA COASTAL EXPRESSWAY
+                <span className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1.5 font-medium">
+                  <Truck className="w-3.5 h-3.5 text-orange-500" />
+                  Distance: 12.4 km via Western Expressway
                 </span>
               </div>
 
               {manifestGenerated ? (
-                <div className="relative z-10 p-6 bg-[#000000] border-2 border-[#ff4d00] flex flex-col gap-4 font-mono text-[10px] uppercase font-bold tracking-widest mt-4">
-                  <div className="flex items-center justify-between border-b border-[#333333] pb-2">
-                    <span className="flex items-center gap-2 text-[#ff4d00]">
+                <div className="p-4 bg-orange-50/70 dark:bg-orange-950/30 border border-orange-200 dark:border-orange-850/60 rounded-xl flex flex-col gap-2 text-xs mt-2">
+                  <div className="flex items-center justify-between border-b border-orange-200/80 dark:border-orange-850/40 pb-1.5">
+                    <span className="flex items-center gap-1.5 text-orange-600 dark:text-orange-400 font-bold">
                       <FileText className="w-4 h-4" />
                       MANIFEST VERIFIED
                     </span>
-                    <span className="text-[#a3a3a3]">HASH: {manifestHash}</span>
+                    <span className="font-mono text-slate-500 dark:text-slate-400">HASH: {manifestHash}</span>
                   </div>
-                  <span className="text-white leading-relaxed">
-                    BATCH: {estimatedWeight}KG • STATUS: DISPATCH QUEUED
+                  <span className="text-slate-700 dark:text-slate-300 font-medium">
+                    Batch: {estimatedWeight} kg • Status: Dispatch Queued
                   </span>
                 </div>
               ) : (
                 <button 
                   onClick={handleExecuteManifest}
                   disabled={isGeneratingManifest}
-                  className="relative z-10 self-start px-8 py-4 bg-white hover:bg-[#ff4d00] text-black font-headline font-black text-sm uppercase tracking-widest border-2 border-white hover:border-[#ff4d00] transition-none flex items-center gap-4 mt-4 disabled:opacity-50"
+                  className="self-start px-6 py-3 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-md transition-all flex items-center gap-2.5 mt-2 disabled:opacity-50"
                 >
                   {isGeneratingManifest ? (
                     <>
-                      <Square className="w-4 h-4 text-black animate-spin border-2 border-black fill-transparent" />
+                      <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
                       <span>MINTING LEDGER...</span>
                     </>
                   ) : (
                     <>
-                      <FileText className="w-5 h-5" />
+                      <FileText className="w-4 h-4" />
                       <span>EXECUTE MANIFEST</span>
                     </>
                   )}
@@ -396,62 +391,62 @@ export default function CircularRecovery() {
         </div>
 
         {/* Circular Economy & Real-Time EPR Material Audit Ledger */}
-        <div className="flex flex-col gap-6 pt-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-4 border-b-2 border-[#333333]">
+        <div className="flex flex-col gap-6 pt-4">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-4 border-b border-slate-200 dark:border-border/70">
             <div className="flex flex-col gap-1">
-              <div className="flex items-center gap-3 text-[10px] font-mono text-[#ff4d00] uppercase font-bold tracking-widest">
-                <Recycle className="w-4 h-4 text-[#ff4d00]" />
+              <div className="flex items-center gap-2 text-xs font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">
+                <Recycle className="w-4 h-4 text-emerald-500" />
                 <span>OFFICIAL VERIFICATION // RECOVERY REPOSITORY</span>
               </div>
-              <h2 className="text-3xl font-headline font-black text-white uppercase tracking-tighter">
+              <h2 className="text-2xl sm:text-3xl font-sans font-bold text-slate-900 dark:text-white">
                 EPR Material Audit Ledger
               </h2>
             </div>
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               <button
                 onClick={loadManifests}
                 disabled={isLoadingManifests}
-                className="px-4 py-2 bg-[#111111] hover:bg-white text-white hover:text-black border-2 border-[#333333] hover:border-white font-mono text-[10px] uppercase font-bold tracking-widest flex items-center gap-2 transition-none"
+                className="px-4 py-2 bg-white dark:bg-card hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-border/70 rounded-xl font-semibold text-xs uppercase tracking-wider shadow-sm flex items-center gap-2 transition-all disabled:opacity-50"
               >
-                <RefreshCw className={`w-3.5 h-3.5 ${isLoadingManifests ? 'animate-spin' : ''}`} />
+                <RefreshCw className={`w-3.5 h-3.5 text-orange-500 ${isLoadingManifests ? 'animate-spin' : ''}`} />
                 <span>REFRESH LEDGER</span>
               </button>
             </div>
           </div>
 
           {/* Aggregate KPI Summary Banner */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-[1px] bg-[#333333] border-2 border-[#333333]">
-            <div className="p-6 bg-[#000000] flex flex-col gap-1 border-l-4 border-l-white">
-              <span className="text-[10px] font-mono text-[#a3a3a3] uppercase font-bold tracking-widest">TOTAL RECOVERED</span>
-              <span className="text-3xl sm:text-4xl font-headline font-black text-white">{totalMassKg.toLocaleString()} KG</span>
-              <span className="text-[9px] font-mono text-[#525252] uppercase font-bold">ALL COASTAL SWEEPS</span>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="p-5 bg-white dark:bg-card border border-slate-200 dark:border-border/70 rounded-2xl shadow-sm flex flex-col gap-1">
+              <span className="text-xs text-slate-400 uppercase font-semibold">Total Recovered</span>
+              <span className="text-2xl sm:text-3xl font-sans font-extrabold text-slate-900 dark:text-white font-mono">{totalMassKg.toLocaleString()} KG</span>
+              <span className="text-[11px] text-slate-400">All coastal sweeps</span>
             </div>
 
-            <div className="p-6 bg-[#000000] flex flex-col gap-1 border-l-4 border-l-[#ff4d00]">
-              <span className="text-[10px] font-mono text-[#a3a3a3] uppercase font-bold tracking-widest">MARKET VALUE</span>
-              <span className="text-3xl sm:text-4xl font-headline font-black text-[#ff4d00]">₹{totalGrossInr.toLocaleString()}</span>
-              <span className="text-[9px] font-mono text-[#525252] uppercase font-bold">REALIZED INFLOW</span>
+            <div className="p-5 bg-white dark:bg-card border border-slate-200 dark:border-border/70 rounded-2xl shadow-sm flex flex-col gap-1">
+              <span className="text-xs text-slate-400 uppercase font-semibold">Market Value</span>
+              <span className="text-2xl sm:text-3xl font-sans font-extrabold text-orange-600 dark:text-orange-400 font-mono">₹{totalGrossInr.toLocaleString()}</span>
+              <span className="text-[11px] text-slate-400">Realized inflow</span>
             </div>
 
-            <div className="p-6 bg-[#000000] flex flex-col gap-1 border-l-4 border-l-emerald-500">
-              <span className="text-[10px] font-mono text-[#a3a3a3] uppercase font-bold tracking-widest">CO₂e AVOIDED</span>
-              <span className="text-3xl sm:text-4xl font-headline font-black text-emerald-400">+{totalCo2e.toFixed(0)} KG</span>
-              <span className="text-[9px] font-mono text-[#525252] uppercase font-bold">VIRGIN RESIN OFFSET</span>
+            <div className="p-5 bg-white dark:bg-card border border-slate-200 dark:border-border/70 rounded-2xl shadow-sm flex flex-col gap-1">
+              <span className="text-xs text-slate-400 uppercase font-semibold">CO₂e Avoided</span>
+              <span className="text-2xl sm:text-3xl font-sans font-extrabold text-emerald-600 dark:text-emerald-400 font-mono">+{totalCo2e.toFixed(0)} KG</span>
+              <span className="text-[11px] text-slate-400">Virgin resin offset</span>
             </div>
 
-            <div className="p-6 bg-[#000000] flex flex-col gap-1 border-l-4 border-l-sky-500">
-              <span className="text-[10px] font-mono text-[#a3a3a3] uppercase font-bold tracking-widest">EPR CREDITS</span>
-              <span className="text-3xl sm:text-4xl font-headline font-black text-sky-400">{totalCredits}</span>
-              <span className="text-[9px] font-mono text-[#525252] uppercase font-bold">CPCB COMPLIANT</span>
+            <div className="p-5 bg-white dark:bg-card border border-slate-200 dark:border-border/70 rounded-2xl shadow-sm flex flex-col gap-1">
+              <span className="text-xs text-slate-400 uppercase font-semibold">EPR Credits</span>
+              <span className="text-2xl sm:text-3xl font-sans font-extrabold text-sky-600 dark:text-sky-400 font-mono">{totalCredits}</span>
+              <span className="text-[11px] text-slate-400">CPCB compliant</span>
             </div>
           </div>
 
           {/* Ledger Table */}
-          <div className="w-full bg-[#000000] border-2 border-[#333333] overflow-x-auto">
-            <table className="w-full text-left border-collapse font-mono text-xs">
+          <div className="w-full bg-white dark:bg-card border border-slate-200 dark:border-border/70 rounded-2xl shadow-sm overflow-hidden overflow-x-auto">
+            <table className="w-full text-left border-collapse text-xs">
               <thead>
-                <tr className="border-b-2 border-[#333333] bg-[#111111] text-[10px] text-[#a3a3a3] uppercase tracking-widest font-bold">
+                <tr className="border-b border-slate-200 dark:border-border/70 bg-slate-50 dark:bg-muted/40 text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold text-[11px]">
                   <th className="p-4">MANIFEST REF</th>
                   <th className="p-4">COASTAL ZONE</th>
                   <th className="p-4">MASS & POLYMER</th>
@@ -461,10 +456,10 @@ export default function CircularRecovery() {
                   <th className="p-4 text-right">ACTION</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#222222]">
+              <tbody className="divide-y divide-slate-100 dark:divide-border/40">
                 {manifests.length === 0 ? (
                   <tr>
-                    <td colSpan={7} className="p-8 text-center text-[#525252] font-mono uppercase tracking-widest font-bold">
+                    <td colSpan={7} className="p-8 text-center text-slate-400 font-mono text-xs">
                       AWAITING FIRST COMPLETED FIELD OPERATION TO MINT CERTIFICATE
                     </td>
                   </tr>
@@ -472,52 +467,54 @@ export default function CircularRecovery() {
                   manifests.map((m) => {
                     const isIssued = m.status === 'MANIFEST_ISSUED' || m.status === 'DISPATCHED_TO_UPCYCLER';
                     return (
-                      <tr key={m.id} className="hover:bg-[#0a0a0a] transition-none">
+                      <tr key={m.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
                         <td className="p-4">
                           <div className="flex flex-col gap-0.5">
-                            <span className="text-white font-headline font-black text-sm tracking-tight">{m.id}</span>
-                            <span className="text-[9px] text-[#737373]">{m.created_at ? new Date(m.created_at).toLocaleDateString() : 'ACTIVE'}</span>
+                            <span className="text-slate-900 dark:text-white font-mono font-bold">{m.id}</span>
+                            <span className="text-[11px] text-slate-400 font-mono">{m.created_at ? new Date(m.created_at).toLocaleDateString() : 'ACTIVE'}</span>
                           </div>
                         </td>
                         <td className="p-4">
-                          <span className="text-white font-bold uppercase">{m.beach_name || m.beach_id}</span>
-                        </td>
-                        <td className="p-4">
-                          <div className="flex flex-col gap-0.5">
-                            <span className="text-white font-bold">{m.plastic_mass_kg} KG</span>
-                            <span className="text-[9px] text-[#a3a3a3] line-clamp-1">{m.composition || 'MIXED POLYMERS'}</span>
-                          </div>
+                          <span className="text-slate-900 dark:text-white font-bold">{m.beach_name || m.beach_id}</span>
                         </td>
                         <td className="p-4">
                           <div className="flex flex-col gap-0.5">
-                            <span className="text-[#ff4d00] font-headline font-black text-sm">₹{Number(m.gross_valuation_inr).toLocaleString()}</span>
-                            <span className="text-[9px] text-emerald-400">+{m.co2e_avoided_kg} KG CO₂</span>
+                            <span className="text-slate-900 dark:text-white font-mono font-bold">{m.plastic_mass_kg} KG</span>
+                            <span className="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-1">{m.composition || 'MIXED POLYMERS'}</span>
                           </div>
                         </td>
                         <td className="p-4">
-                          <div className="flex items-center gap-2 text-[#a3a3a3]">
-                            <Truck className="w-3.5 h-3.5 text-white shrink-0" />
-                            <span className="text-[10px] text-white uppercase font-bold">{m.upcycler_facility}</span>
+                          <div className="flex flex-col gap-0.5">
+                            <span className="text-orange-600 dark:text-orange-400 font-mono font-bold text-sm">₹{Number(m.gross_valuation_inr).toLocaleString()}</span>
+                            <span className="text-[11px] text-emerald-600 dark:text-emerald-400 font-mono">+{m.co2e_avoided_kg} KG CO₂</span>
                           </div>
                         </td>
                         <td className="p-4">
-                          <span className={`px-2.5 py-1 text-[9px] font-bold uppercase tracking-widest inline-flex items-center gap-1.5 ${
-                            isIssued ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30' : 'bg-[#ff4d00]/10 text-[#ff4d00] border border-[#ff4d00]/30'
+                          <div className="flex items-center gap-1.5 text-slate-700 dark:text-slate-300">
+                            <Truck className="w-3.5 h-3.5 text-orange-500 shrink-0" />
+                            <span className="text-xs font-semibold">{m.upcycler_facility}</span>
+                          </div>
+                        </td>
+                        <td className="p-4">
+                          <span className={`px-2.5 py-1 text-xs font-semibold rounded-md inline-flex items-center gap-1.5 ${
+                            isIssued 
+                              ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/60' 
+                              : 'bg-orange-50 dark:bg-orange-950/40 text-orange-700 dark:text-orange-400 border border-orange-200 dark:border-orange-800/60'
                           }`}>
-                            {isIssued ? <CheckCircle2 className="w-3 h-3 text-emerald-400" /> : <Clock className="w-3 h-3 text-[#ff4d00]" />}
+                            {isIssued ? <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" /> : <Clock className="w-3.5 h-3.5 text-orange-500" />}
                             {m.status}
                           </span>
                         </td>
                         <td className="p-4 text-right">
                           {isIssued ? (
-                            <span className="text-[9px] text-[#737373] uppercase font-bold tracking-widest">
+                            <span className="text-xs text-slate-400 font-mono font-bold uppercase">
                               SIGNED
                             </span>
                           ) : (
                             <button
                               onClick={() => handleSignRowManifest(m.id)}
                               disabled={signingId === m.id}
-                              className="px-4 py-2 bg-white hover:bg-[#ff4d00] text-black font-headline font-black text-[10px] uppercase tracking-widest transition-none disabled:opacity-50"
+                              className="px-3 py-1.5 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold text-xs uppercase tracking-wider rounded-lg shadow-sm transition-all disabled:opacity-50"
                             >
                               {signingId === m.id ? 'SIGNING...' : 'SIGN & ISSUE'}
                             </button>
