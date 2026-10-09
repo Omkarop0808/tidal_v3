@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000/api/v1';
-export const WS_BASE_URL = import.meta.env.VITE_WS_URL || 'ws://127.0.0.1:8000/ws';
+const API_BASE_URL = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? 'https://tidal-backend-ilwj.onrender.com/api/v1' : 'http://127.0.0.1:8000/api/v1');
+export const WS_BASE_URL = import.meta.env.VITE_WS_URL || (import.meta.env.PROD ? 'wss://tidal-backend-ilwj.onrender.com/ws' : 'ws://127.0.0.1:8000/ws');
 
 export const apiClient = axios.create({
   baseURL: API_BASE_URL,
